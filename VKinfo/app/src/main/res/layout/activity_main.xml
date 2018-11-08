@@ -15,6 +15,7 @@
 
         <EditText
             android:id="@+id/etSeachFild"
+            android:layout_weight="3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/id_vkontakte"
@@ -24,6 +25,7 @@
 
         <Button
             android:id="@+id/btnSeachVK"
+            android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/btnSeach"
@@ -34,6 +36,13 @@
 
     <TextView
         android:id="@+id/tvResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/result"
+        />
+
+    <TextView
+        android:id="@+id/tvQuery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/result"

@@ -17,11 +17,14 @@ public class NetworkUtils {
 
     private static final String VK_API_BASE_URL = "https://api.vk.com";
     private static final String VK_USERS_GET = "/method/users.get";
-    private static final String PARAM_USER_ID = "user_ids";
+    private static final String PARAM_USER_ID = "user_id";
     private static final String PARAM_VERSION = "v";
     private static final String ACCESS_TOKEN = "acces_token";
 
     public static URL generateURL(String userId) {
+
+        String token = VK_API_BASE_URL + VK_USERS_GET + "?" + PARAM_USER_ID + "=" + userId + "&" + PARAM_VERSION + "=5.8" + "&" + ACCESS_TOKEN +
+                "=842f64a9842f64a9842f64a9c684498efc8842f842f64a9dfcc65279d362a84d26ab0a5";
 
 
 
@@ -30,12 +33,12 @@ public class NetworkUtils {
                 .buildUpon()
                 .appendQueryParameter(PARAM_USER_ID, userId)
                 .appendQueryParameter(PARAM_VERSION, "5.8")
-                .appendQueryParameter(ACCESS_TOKEN,"c6044b7fc6044b7fc6044b7fb4c6608dc6cc604c6044b7f9d256697c11625abfcfd58b4")
+                .appendQueryParameter(ACCESS_TOKEN, "842f64a9842f64a9842f64a9c684498efc8842f842f64a9dfcc65279d362a84d26ab0a5")
                 .build();
 
         URL url = null;
         try {
-            url = new URL(builtUri.toString());
+            url = new URL("https://api.vk.com/method/users.get?user_id=" + userId + "&v=5.8&access_token=842f64a9842f64a9842f64a9c684498efc8842f842f64a9dfcc65279d362a84d26ab0a5");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
