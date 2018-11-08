@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -23,7 +24,8 @@ import static ru.startandroid.vkinfo.Utils.NetworkUtils.getResponseFromURL;
 public class MainActivity extends AppCompatActivity {
     EditText etSeachFild;
     Button btnSeachVK;
-    TextView tvResult, tvQuery;
+    TextView tvResult, tvErrorMessage;
+    ProgressBar pbLoadIndicator;
 
 
     @Override
@@ -34,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
         etSeachFild = (EditText) findViewById(R.id.etSeachFild);
         btnSeachVK = (Button) findViewById(R.id.btnSeachVK);
         tvResult = (TextView) findViewById(R.id.tvResult);
-        tvQuery = (TextView) findViewById(R.id.tvQuery);
+        tvErrorMessage = (TextView) findViewById(R.id.tvErrorMessage);
+        pbLoadIndicator = (ProgressBar) findViewById(R.id.pbLoadIndicator);
 
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
@@ -42,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
                 URL generatedURL = generateURL(etSeachFild.getText().toString());
 
                 new VKqueryTask().execute(generatedURL);
-                tvQuery.setText(String.valueOf(generatedURL));
 
 
 
@@ -57,7 +59,22 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+    private void showResultTextView() {
+        tvResult.setVisibility(View.VISIBLE);
+        tvErrorMessage.setVisibility(View.INVISIBLE);
+    }
+
+    private void showErrorTextView() {
+        tvResult.setVisibility(View.INVISIBLE);
+        tvErrorMessage.setVisibility(View.VISIBLE);
+    }
+
     class VKqueryTask extends AsyncTask<URL, Void, String> {
+
+        @Override
+        protected void onPreExecute () {
+            pbLoadIndicator.setVisibility(View.VISIBLE);
+        }
 
         @Override
         protected String doInBackground(URL... urls) {
@@ -77,21 +94,27 @@ public class MainActivity extends AppCompatActivity {
             String firstName = null;
             String lastName = null;
 
-            try {
-                JSONObject jsonResponse = new JSONObject(response);
-                JSONArray jsonArray = jsonResponse.getJSONArray("response");
-                JSONObject userInfo = jsonArray.getJSONObject(0);
-                firstName = userInfo.getString("first_name");
-                lastName = userInfo.getString("last_name");
-            } catch (JSONException e) {
-                e.printStackTrace();
+            if (response !=null && !response.equals("")) {
+
+                try {
+                    JSONObject jsonResponse = new JSONObject(response);
+                    JSONArray jsonArray = jsonResponse.getJSONArray("response");
+                    JSONObject userInfo = jsonArray.getJSONObject(0);
+                    firstName = userInfo.getString("first_name");
+                    lastName = userInfo.getString("last_name");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                String resultingString = "Имя: " + firstName + "\n" + "Фамилия: " + lastName;
+                tvResult.setText(resultingString);
+
+                showResultTextView();
+
+            }else {
+                showErrorTextView();
+
             }
-
-            String resultingString = "Имя: " + firstName + "\n" + "Фамилия: " + lastName;
-            tvResult.setText(response);
-            tvQuery.setText(resultingString);
-
-
+            pbLoadIndicator.setVisibility(View.INVISIBLE);
 
         }
     }
