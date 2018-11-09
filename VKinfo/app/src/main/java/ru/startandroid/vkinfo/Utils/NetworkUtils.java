@@ -22,24 +22,19 @@ public class NetworkUtils {
     private static final String PARAM_VERSION = "v";
     private static final String ACCESS_TOKEN = "acces_token";
 
-    public static URL generateURL(String userId) {
-
-        String token = VK_API_BASE_URL + VK_USERS_GET + "?" + PARAM_USER_ID + "=" + userId + "&" + PARAM_VERSION + "=5.8" + "&" + ACCESS_TOKEN +
-                "=842f64a9842f64a9842f64a9c684498efc8842f842f64a9dfcc65279d362a84d26ab0a5";
-
-
+    public static URL generateURL(String userIds) {
 
 
         Uri builtUri = Uri.parse(VK_API_BASE_URL + VK_USERS_GET)
                 .buildUpon()
-                .appendQueryParameter(PARAM_USER_ID, userId)
+                .appendQueryParameter(PARAM_USER_ID, userIds)
                 .appendQueryParameter(PARAM_VERSION, "5.8")
                 .appendQueryParameter(ACCESS_TOKEN, "842f64a9842f64a9842f64a9c684498efc8842f842f64a9dfcc65279d362a84d26ab0a5")
                 .build();
 
         URL url = null;
         try {
-            url = new URL("https://api.vk.com/method/users.get?user_id=" + userId + "&v=5.8&access_token=842f64a9842f64a9842f64a9c684498efc8842f842f64a9dfcc65279d362a84d26ab0a5");
+            url = new URL("https://api.vk.com/method/users.get?user_ids=" + userIds + "&v=5.8&access_token=842f64a9842f64a9842f64a9c684498efc8842f842f64a9dfcc65279d362a84d26ab0a5");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

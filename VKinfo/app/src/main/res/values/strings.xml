@@ -2,6 +2,6 @@
     <string name="app_name">VKinfo</string>
     <string name="id_vkontakte">Введите ID VKontakte</string>
     <string name="btnSeach">Поиск</string>
-    <string name="result">Результат будет отображен здесь</string>
+    <string name="result"> </string>
     <string name="error_massage">Произошла ошибка, попробуйте еще раз</string>
 </resources>
