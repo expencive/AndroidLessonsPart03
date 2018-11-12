@@ -1,4 +1,4 @@
-package ru.startandroid.recycleviewtestapp;
+package ru.startandroid.vkinfoexperemental;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * Created by Настик on 08.11.2018.
@@ -16,15 +15,10 @@ public class NumbersAdapter extends RecyclerView.Adapter<NumbersAdapter.NumberVi
 
     private static int viewHolderCount;
     private int numberItems;
-    private Context parent;
 
-    public NumbersAdapter (int numberOfItems, Context parent) {
+    public NumbersAdapter(int numberOfItems) {
         numberItems = numberOfItems;
         viewHolderCount = 0;
-
-        this.parent = parent;
-
-
     }
 
     @Override
@@ -63,15 +57,6 @@ public class NumbersAdapter extends RecyclerView.Adapter<NumbersAdapter.NumberVi
             super(itemView);
             listItemNumberView = itemView.findViewById(R.id.tvNumberItem);
             viewHolderIndex = itemView.findViewById(R.id.tvViewHolderNumber);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    int positionIndex = getAdapterPosition();
-                    Toast.makeText(parent, "Element: " +positionIndex, Toast.LENGTH_SHORT).show();
-                }
-            });
         }
         void bind(int listIndex) {
             listItemNumberView.setText(String.valueOf(listIndex));

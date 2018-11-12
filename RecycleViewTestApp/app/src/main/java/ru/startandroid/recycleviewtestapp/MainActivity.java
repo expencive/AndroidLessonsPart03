@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         rvNumbers.setLayoutManager(layoutManager);
         rvNumbers.setHasFixedSize(true);
 
-        numbersAdapter = new NumbersAdapter(100);
+        numbersAdapter = new NumbersAdapter(100, this);
         rvNumbers.setAdapter(numbersAdapter);
     }
 }
