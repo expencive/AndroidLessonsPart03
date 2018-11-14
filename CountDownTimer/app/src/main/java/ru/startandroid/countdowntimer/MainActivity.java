@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+    private  long backPressedTime;
     private TextView countdownText, tvCheck;
     private Button btnCountdown;
     EditText etMinutes, etSeconds;
@@ -149,5 +150,19 @@ public class MainActivity extends AppCompatActivity {
         tvCheck.setText("ПАУЗА");
         tvCheck.setVisibility(View.VISIBLE);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+
+
+        if (backPressedTime + 2000 > System.currentTimeMillis()) {
+            super.onBackPressed();
+            return;
+        } else {
+            Toast.makeText(getBaseContext(), "Для выхода нажмите кнопку возврата еще раз", Toast.LENGTH_SHORT).show();
+        }
+
+        backPressedTime = System.currentTimeMillis();
     }
 }

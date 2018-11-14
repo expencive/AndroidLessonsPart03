@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
 
                             Toast.makeText(MainActivity.this,"Вы нажали ок°",Toast.LENGTH_LONG).show();
-                        
+
 
                     }
                 })
