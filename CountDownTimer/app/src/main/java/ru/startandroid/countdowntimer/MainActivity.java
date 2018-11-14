@@ -12,7 +12,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
     private  long backPressedTime;
     private TextView countdownText, tvCheck;
-    private Button btnCountdown;
+    private Button btnCountdown, btnClearAll;
     EditText etMinutes, etSeconds;
 
     private CountDownTimer countDownTimer;
@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         countdownText = (TextView) findViewById(R.id.countdown_text);
         tvCheck = (TextView) findViewById(R.id.tvCheck);
         btnCountdown = (Button) findViewById(R.id.countdown_button);
+        btnClearAll = (Button) findViewById(R.id.btnClearTimer);
         etMinutes = (EditText) findViewById(R.id.etMinutes);
         etSeconds = (EditText) findViewById(R.id.etSeconds);
 
@@ -103,6 +104,8 @@ public class MainActivity extends AppCompatActivity {
                 etSeconds.setText("");
                 etMinutes.setVisibility(View.INVISIBLE);
                 etSeconds.setVisibility(View.INVISIBLE);
+                countdownText.setVisibility(View.VISIBLE);
+                btnClearAll.setVisibility(View.INVISIBLE);
 
 
 
@@ -149,6 +152,8 @@ public class MainActivity extends AppCompatActivity {
         timerRunning = false;
         tvCheck.setText("ПАУЗА");
         tvCheck.setVisibility(View.VISIBLE);
+        btnClearAll.setVisibility(View.VISIBLE);
+
 
     }
 
@@ -164,5 +169,19 @@ public class MainActivity extends AppCompatActivity {
         }
 
         backPressedTime = System.currentTimeMillis();
+    }
+    public void onClickClearAll (View view) {
+        stopAllandAgain();
+    }
+
+    private void stopAllandAgain() {
+        countDownTimer.cancel();
+        etMinutes.setText("");
+        etSeconds.setText("");
+        tvCheck.setVisibility(View.INVISIBLE);
+        etMinutes.setVisibility(View.VISIBLE);
+        etSeconds.setVisibility(View.VISIBLE);
+        btnClearAll.setVisibility(View.INVISIBLE);
+        countdownText.setVisibility(View.INVISIBLE);
     }
 }

@@ -44,6 +44,7 @@
         android:layout_height="wrap_content"
         tools:text="10:00"
         android:textSize="70dp"
+        android:visibility="invisible"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="203dp" />
@@ -66,5 +67,17 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="74dp" />
+
+    <Button
+        android:id="@+id/btnClearTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="Сброс"
+        android:visibility="invisible"
+        android:onClick="onClickClearAll"
+        android:layout_above="@+id/countdown_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="12dp" />
 
 </RelativeLayout>
