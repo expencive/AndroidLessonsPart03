@@ -1,6 +1,9 @@
 package ru.startandroid.countdowntimer;
 
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.os.CountDownTimer;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -121,6 +124,8 @@ public class MainActivity extends AppCompatActivity {
                 etMinutes.setVisibility(View.VISIBLE);
                 etSeconds.setVisibility(View.VISIBLE);
                 btnCountdown.setText("Новый отсчет");
+                notificationEnd();
+
 
 
 
@@ -184,4 +189,19 @@ public class MainActivity extends AppCompatActivity {
         btnClearAll.setVisibility(View.INVISIBLE);
         countdownText.setVisibility(View.INVISIBLE);
     }
+
+    public void notificationEnd() {
+        NotificationCompat.Builder builder =
+                new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.mipmap.ic_launcher)
+                        .setContentTitle("Время вышло")
+                        .setContentText("Вы можете начать сначала");
+
+        Notification notification = builder.build();
+
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        notificationManager.notify(1, notification);
+    }
+    
 }
