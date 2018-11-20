@@ -28,31 +28,10 @@ public class MainActivity extends AppCompatActivity {
 
         createExampleList();
         buildRecyclerView();
+        setButtons();
 
 
 
-        btnInsert = (Button) findViewById(R.id.btnInsert);
-        btnDelete = (Button) findViewById(R.id.btnDelete);
-        etInsert = (EditText) findViewById(R.id.etInsert);
-        etDelete = (EditText) findViewById(R.id.etDelete);
-
-        btnInsert.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int position = Integer.parseInt(etInsert.getText().toString());
-                insertItem(position);
-
-            }
-        });
-
-        btnDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int position = Integer.parseInt(etDelete.getText().toString());
-                removeItem(position);
-
-            }
-        });
 
 
 
@@ -119,7 +98,39 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(int position) {
                 changeItem(position, "Clicked");
             }
+
+            @Override
+            public void onDeleteClick(int position) {
+                removeItem(position);
+            }
         });
+
+    }
+
+    public void setButtons() {
+        btnInsert = (Button) findViewById(R.id.btnInsert);
+        btnDelete = (Button) findViewById(R.id.btnDelete);
+        etInsert = (EditText) findViewById(R.id.etInsert);
+        etDelete = (EditText) findViewById(R.id.etDelete);
+
+        btnInsert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = Integer.parseInt(etInsert.getText().toString());
+                insertItem(position);
+
+            }
+        });
+
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = Integer.parseInt(etDelete.getText().toString());
+                removeItem(position);
+
+            }
+        });
+
 
     }
 }
