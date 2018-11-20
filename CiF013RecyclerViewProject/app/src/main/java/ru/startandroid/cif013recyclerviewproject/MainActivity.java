@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<ExampleItem> mExampleList;
 
     private RecyclerView mRecycleView;
-    private RecyclerView.Adapter mAdapter;
+    private ExampleAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private Button btnInsert, btnDelete;
     private EditText etInsert, etDelete;
@@ -88,6 +88,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public  void  changeItem(int position, String text) {
+        mExampleList.get(position).changeText1(text);
+        mAdapter.notifyItemChanged(position);
+
+
+    }
+
     public void createExampleList() {
         mExampleList = new ArrayList<>();
         mExampleList.add(new ExampleItem(R.drawable.ic_android, "line 1", "line 2"));
@@ -106,6 +113,13 @@ public class MainActivity extends AppCompatActivity {
 
         mRecycleView.setLayoutManager(mLayoutManager);
         mRecycleView.setAdapter(mAdapter);
+
+        mAdapter.setOnItemClickListener(new ExampleAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                changeItem(position, "Clicked");
+            }
+        });
 
     }
 }
