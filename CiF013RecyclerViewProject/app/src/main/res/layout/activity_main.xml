@@ -13,7 +13,41 @@
         android:padding="4dp"
         android:scrollbars="vertical"
         android:background="@android:color/darker_gray"
+        android:layout_marginBottom="100dp"
         />
+
+    <EditText
+        android:id="@+id/etInsert"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="24dp"
+        android:inputType="number"/>
+    <Button
+        android:id="@+id/btnInsert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="insert"
+        android:layout_alignTop="@+id/etInsert"
+        android:layout_toEndOf="@+id/etInsert" />
+    <EditText
+        android:id="@+id/etDelete"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="54dp"
+        android:layout_alignBottom="@+id/btnInsert"
+        android:layout_toEndOf="@+id/btnInsert"
+        android:inputType="number"/>
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        android:layout_alignBaseline="@+id/etDelete"
+        android:layout_alignBottom="@+id/etDelete"
+        android:layout_toEndOf="@+id/etDelete" />
 
 
 </RelativeLayout>
