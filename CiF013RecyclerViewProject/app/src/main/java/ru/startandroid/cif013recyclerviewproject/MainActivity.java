@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecycleView;
@@ -18,6 +19,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ArrayList<ExampleItem> exampleList = new ArrayList<>();
+        exampleList.add(new ExampleItem(R.drawable.ic_android, "line 1", "line 2"));
+        exampleList.add(new ExampleItem(R.drawable.ic_arrow, "line A", "line B"));
+        exampleList.add(new ExampleItem(R.drawable.ic_beach_access, "line I", "line II"));
         exampleList.add(new ExampleItem(R.drawable.ic_android, "line 1", "line 2"));
         exampleList.add(new ExampleItem(R.drawable.ic_arrow, "line A", "line B"));
         exampleList.add(new ExampleItem(R.drawable.ic_beach_access, "line I", "line II"));

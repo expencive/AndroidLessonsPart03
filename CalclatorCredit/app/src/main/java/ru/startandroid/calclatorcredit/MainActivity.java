@@ -18,6 +18,10 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static String EXTRA = "mLoanAmount";
+    public static String EXTRA2 = "mInterestRate";
+    public static String EXTRA3 = "mLoanPeriod";
+
     EditText mLoanAmount, mInterestRate, mLoanPeriod;
     TextView mMontlyPaymentResult, mTotalPaymentsResult, mTotalOverpayResult;
     SharedPreferences sp;
@@ -70,9 +74,9 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Заполните все поля", Toast.LENGTH_SHORT).show();
         } else {
             Intent intent = new Intent(this, GraphPaymentAdapter.class);
-            intent.putExtra("mLoanAmount", mLoanAmount.getText().toString());
-            intent.putExtra("mInterestRate", mInterestRate.getText().toString());
-            intent.putExtra("mLoanPeriod", mLoanPeriod.getText().toString());
+            intent.putExtra(EXTRA, mLoanAmount.getText().toString());
+            intent.putExtra(EXTRA2, mInterestRate.getText().toString());
+            intent.putExtra(EXTRA3, mLoanPeriod.getText().toString());
             startActivity(intent);
         }
     }
