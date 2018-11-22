@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         TextView tvDateInsert = (TextView) findViewById(R.id.tvDateInsert);
 
         tvDateInsert.setText(currentDateString);
+        
 
     }
 }
