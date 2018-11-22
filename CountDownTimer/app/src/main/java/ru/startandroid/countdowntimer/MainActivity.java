@@ -188,6 +188,7 @@ public class MainActivity extends AppCompatActivity {
         etSeconds.setVisibility(View.VISIBLE);
         btnClearAll.setVisibility(View.INVISIBLE);
         countdownText.setVisibility(View.INVISIBLE);
+
     }
 
     public void notificationEnd() {
