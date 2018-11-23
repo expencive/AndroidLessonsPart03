@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="ru.startandroid.cif020customtoasts.MainActivity">
+
+
+    <Button
+        android:id="@+id/btnError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show error toast"
+        android:onClick="showToastError"
+        />
+
+    <Button
+        android:id="@+id/btnSucces"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show Succes toast"
+        android:onClick="showToastError"
+        />
+    <Button
+        android:id="@+id/btnInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show Info toast"
+        android:onClick="showToastError"
+        />
+    <Button
+        android:id="@+id/btnWarning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show Warning toast"
+        android:onClick="showToastError"
+        />
+    <Button
+        android:id="@+id/btnNormal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show Normal toast with icon"
+        android:onClick="showToastError"
+        />
+
+
+
+
+</LinearLayout>
