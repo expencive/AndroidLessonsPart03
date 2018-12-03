@@ -25,12 +25,15 @@ public class GroceryAdapter extends RecyclerView.Adapter<GroceryAdapter.GroceryV
     public class GroceryViewHolder extends RecyclerView.ViewHolder {
         public TextView nameText;
         public TextView countText;
+        public TextView timeStampItem;
 
         public GroceryViewHolder(View itemView) {
             super(itemView);
 
             nameText = itemView.findViewById(R.id.tvNameItem);
             countText = itemView.findViewById(R.id.tvAmountItem);
+            timeStampItem = itemView.findViewById(R.id.tvTimeStampItem);
+
         }
     }
 
@@ -49,11 +52,13 @@ public class GroceryAdapter extends RecyclerView.Adapter<GroceryAdapter.GroceryV
 
         String name = mCursor.getString(mCursor.getColumnIndex(GroceryContract.GroceryEntry.COLUMN_NAME));
         int amount = mCursor.getInt(mCursor.getColumnIndex(GroceryContract.GroceryEntry.COLUMN_AMOUNT));
+        String timeStamp = mCursor.getString(mCursor.getColumnIndex(GroceryContract.GroceryEntry.COLUMN_TIMESTAMP));
 
         long id = mCursor.getLong(mCursor.getColumnIndex(GroceryContract.GroceryEntry._ID));
 
         holder.nameText.setText(name);
         holder.countText.setText(String.valueOf(amount));
+        holder.timeStampItem.setText(timeStamp);
         holder.itemView.setTag(id);
 
     }

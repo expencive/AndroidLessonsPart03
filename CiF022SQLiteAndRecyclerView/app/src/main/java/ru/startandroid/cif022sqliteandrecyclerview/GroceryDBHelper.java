@@ -27,6 +27,7 @@ public class GroceryDBHelper extends SQLiteOpenHelper {
                 GroceryEntry.COLUMN_AMOUNT + " INTEGER NOT NULL, " +
                 GroceryEntry.COLUMN_TIMESTAMP + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP" +
                 ");";
+        //" TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
 
         db.execSQL(SQL_CREATE_GROCERYLIST_TABLE);
 
