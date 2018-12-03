@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
 
         tvDateInsert.setText(currentDateString);
 
-        
+
 
     }
 }

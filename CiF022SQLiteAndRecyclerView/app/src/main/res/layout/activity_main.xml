@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context="ru.startandroid.cif022sqliteandrecyclerview.MainActivity">
+
+    <EditText
+        android:id="@+id/etName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tvAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="50sp"
+        android:layout_below="@+id/etName"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="8dp"
+        android:layout_marginTop="16dp" />
+
+    <Button
+        android:id="@+id/btnDecrease"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:text="-"
+        android:layout_alignTop="@+id/tvAmount"
+        android:layout_toStartOf="@+id/tvAmount"
+        android:layout_marginEnd="12dp" />
+
+    <Button
+        android:id="@+id/btnIncrease"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:text="+"
+        android:layout_alignTop="@+id/tvAmount"
+        android:layout_toEndOf="@+id/tvAmount"
+        android:layout_marginStart="12dp" />
+
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="add"
+        android:layout_alignBaseline="@+id/btnIncrease"
+        android:layout_alignBottom="@+id/btnIncrease"
+        android:layout_toEndOf="@+id/btnIncrease"
+        android:layout_marginStart="8dp"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tvAmount" />
+
+
+
+
+</RelativeLayout>
