@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private GroceryAdapter mAdapter;
     private EditText etName;
     private TextView tvAmount;
-    private int mAmount = 0;
+    private int mAmount = 1;
 
 
     @Override
@@ -62,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 addItem();
 
+
             }
         });
     }
@@ -79,7 +81,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void addItem() {
         if (etName.getText().toString().trim().length()==0 || mAmount ==0) {
+            etName.setText("");
+            Toast.makeText(this, "Введите название", Toast.LENGTH_SHORT).show();
             return;
+
+
         }
 
         String name = etName.getText().toString();
@@ -91,6 +97,8 @@ public class MainActivity extends AppCompatActivity {
         mAdapter.swapCursor(getAllItems());
 
         etName.getText().clear();
+        mAmount=1;
+        tvAmount.setText(String.valueOf(mAmount));
     }
 
     private Cursor getAllItems () {
