@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,15 +32,40 @@ public class MainActivity extends AppCompatActivity {
         buildRecyclerView();
         setButtons();
 
+        EditText etSeach = (EditText) findViewById(R.id.etSeach);
+        etSeach.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filter(s.toString());
+
+            }
+        });
 
 
 
+    }
 
+    private void filter(String textSeach) {
 
+        ArrayList<ExampleItem> filteredList = new ArrayList<>();
 
+        for (ExampleItem item : mExampleList) {
+            if (item.getText1().toLowerCase().contains(textSeach.toLowerCase())) {
+                filteredList.add(item);
+            }
+        }
 
-
-
+        mAdapter.filterList(filteredList);
 
     }
 
@@ -76,12 +103,25 @@ public class MainActivity extends AppCompatActivity {
 
     public void createExampleList() {
         mExampleList = new ArrayList<>();
-        mExampleList.add(new ExampleItem(R.drawable.ic_android, "line 1", "line 2"));
-        mExampleList.add(new ExampleItem(R.drawable.ic_arrow, "line A", "line B"));
-        mExampleList.add(new ExampleItem(R.drawable.ic_beach_access, "line I", "line II"));
-        mExampleList.add(new ExampleItem(R.drawable.ic_android, "line 1", "line 2"));
-        mExampleList.add(new ExampleItem(R.drawable.ic_arrow, "line A", "line B"));
-        mExampleList.add(new ExampleItem(R.drawable.ic_beach_access, "line I", "line II"));
+        mExampleList.add(new ExampleItem(R.drawable.ic_android, "Один", "line 2"));
+        mExampleList.add(new ExampleItem(R.drawable.ic_arrow, "Два", "line B"));
+        mExampleList.add(new ExampleItem(R.drawable.ic_beach_access, "Три", "line II"));
+        mExampleList.add(new ExampleItem(R.drawable.ic_android, "Четыре", "line 2"));
+        mExampleList.add(new ExampleItem(R.drawable.ic_arrow, "Пять", "line B"));
+        mExampleList.add(new ExampleItem(R.drawable.ic_beach_access, "Шесть", "line II"));
+        mExampleList.add(new ExampleItem(R.drawable.ic_android, "Семь", "line 2"));
+        mExampleList.add(new ExampleItem(R.drawable.ic_arrow, "Восемь", "line B"));
+        mExampleList.add(new ExampleItem(R.drawable.ic_beach_access, "Девять", "line II"));
+        mExampleList.add(new ExampleItem(R.drawable.ic_android, "Десять", "line 2"));
+        mExampleList.add(new ExampleItem(R.drawable.ic_arrow, "Одиннадцать", "line B"));
+        mExampleList.add(new ExampleItem(R.drawable.ic_beach_access, "Двеннадцать", "line II"));
+        mExampleList.add(new ExampleItem(R.drawable.ic_android, "Триннадцать", "line 2"));
+        mExampleList.add(new ExampleItem(R.drawable.ic_arrow, "Четырнадцать", "line B"));
+        mExampleList.add(new ExampleItem(R.drawable.ic_beach_access, "Пятнадцать", "line II"));
+        mExampleList.add(new ExampleItem(R.drawable.ic_android, "Шестнадцать", "line 2"));
+        mExampleList.add(new ExampleItem(R.drawable.ic_arrow, "Семнадцать", "line B"));
+        mExampleList.add(new ExampleItem(R.drawable.ic_beach_access, "Восемьнадцать", "line II"));
+
     }
 
     public void buildRecyclerView() {

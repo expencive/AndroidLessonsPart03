@@ -109,4 +109,10 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         return mExampleList.size();
     }
 
+    public void filterList(ArrayList<ExampleItem> filteredList) {
+        mExampleList = filteredList;
+        notifyDataSetChanged();
+
+    }
+
 }
