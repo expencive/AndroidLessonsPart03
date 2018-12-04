@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1021253432000",
+    "firebase_url": "https://cif023firebasenotification.firebaseio.com",
+    "project_id": "cif023firebasenotification",
+    "storage_bucket": "cif023firebasenotification.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1021253432000:android:bd4d79d5ea43d81e",
+        "android_client_info": {
+          "package_name": "ru.startandroid.cif023firebasenotification"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1021253432000-g5s60nb0t3j9dt8p7645gpb7lgg23tka.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.startandroid.cif023firebasenotification",
+            "certificate_hash": "e152aa86cc8303bb7e1ee2a1ddfaeb0c33e0a3dc"
+          }
+        },
+        {
+          "client_id": "1021253432000-tqvo4o6e3h2l4edf1e87do5hua26d5df.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEjdO7TIL84S0zrwTqAcEJYkQahZiJFBA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1021253432000-tqvo4o6e3h2l4edf1e87do5hua26d5df.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
