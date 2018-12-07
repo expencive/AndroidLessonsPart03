@@ -61,8 +61,8 @@ public class MainActivity extends AppCompatActivity {
         float speed = (float) mSeekBarSpeed.getProgress() /50;
         if (speed <0.1) speed = 0.1f;
 
-        mTTS.setPitch(pitch);
-        mTTS.setSpeechRate(speed);
+        //mTTS.setPitch(pitch);
+        //mTTS.setSpeechRate(speed);
 
         mTTS.speak(text, TextToSpeech.QUEUE_FLUSH, null);
     }
@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
             mTTS.shutdown();
         }
 
+        
         super.onDestroy();
     }
 }
