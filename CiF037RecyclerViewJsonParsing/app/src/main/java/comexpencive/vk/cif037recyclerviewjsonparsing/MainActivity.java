@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         mExampleList = new ArrayList<>();
 
         mRequestQueue = Volley.newRequestQueue(this);
+        parseJson();
 
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }).attachToRecyclerView(mRecyclerView);
 
-        parseJson();
+
     }
 
     private void parseJson() {
@@ -96,7 +97,8 @@ public class MainActivity extends AppCompatActivity {
     public void  removeItem(int position) {
 
             mExampleList.remove(position);
-            mExampleAdapter.notifyItemRemoved(position);}
-
+            mExampleAdapter.notifyItemRemoved(position);
     }
 
+
+}
