@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -37,6 +39,20 @@ public class MainActivity extends AppCompatActivity {
         mExampleList = new ArrayList<>();
 
         mRequestQueue = Volley.newRequestQueue(this);
+
+
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                removeItem((int) viewHolder.itemView.getTag());
+
+            }
+        }).attachToRecyclerView(mRecyclerView);
 
         parseJson();
     }
@@ -76,4 +92,11 @@ public class MainActivity extends AppCompatActivity {
 
         mRequestQueue.add(request);
     }
-}
+
+    public void  removeItem(int position) {
+
+            mExampleList.remove(position);
+            mExampleAdapter.notifyItemRemoved(position);}
+
+    }
+
