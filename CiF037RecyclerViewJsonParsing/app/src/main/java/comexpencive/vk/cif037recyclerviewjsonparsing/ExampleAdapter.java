@@ -22,8 +22,8 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
     private ArrayList<ExampleItem> mExampleList;
 
     public ExampleAdapter(Context context, ArrayList<ExampleItem> exampleList) {
-        this.mContext = context;
-        this.mExampleList = exampleList;
+        mContext = context;
+        mExampleList = exampleList;
     }
 
     @Override
@@ -41,7 +41,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         int likeCount = currentItem.getLikes();
 
         holder.mTextViewCreator.setText(creatorName);
-        holder.mTextViewLikes.setText("Likes; " + likeCount);
+        holder.mTextViewLikes.setText("Likes: " + likeCount);
         Picasso.with(mContext).load(imageUrl).fit().centerInside().into(holder.mImageView);
 
     }

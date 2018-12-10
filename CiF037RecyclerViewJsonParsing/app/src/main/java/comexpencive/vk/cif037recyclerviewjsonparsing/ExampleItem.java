@@ -10,10 +10,10 @@ public class ExampleItem {
     private String mCreator;
     private int mLikes;
 
-    public ExampleItem(String mImageUrl, String mCreator, int mLikes) {
-        this.mImageUrl = mImageUrl;
-        this.mCreator = mCreator;
-        this.mLikes = mLikes;
+    public ExampleItem(String imageUrl, String creator, int likes) {
+        mImageUrl = imageUrl;
+        mCreator = creator;
+        mLikes = likes;
     }
 
     public String getImageUrl() {
