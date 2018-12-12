@@ -12,7 +12,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private  boolean player1turn = true;
 
-    private int roundcount;
+    private int roundCount;
 
     private int player1points;
     private int player2po1nts;
@@ -41,26 +41,85 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!((Button) v).getText().toString().equals("")) {
-                    return;
-                }
 
-                if (player1turn) {
-                    ((Button) v).setText("X");
-                }else {
-                    ((Button) v).setText("O");
-                }
-                roundcount++;
             }
         });
     }
 
     @Override
     public void onClick(View v) {
+        if (!((Button) v).getText().toString().equals("")) {
+            return;
+        }
+
+        if (player1turn) {
+            ((Button) v).setText("X");
+        }else {
+            ((Button) v).setText("O");
+        }
+        roundCount++;
+        if (checkForWin()) {
+            if (player1turn) {
+                player1Wins();
+            } else {
+                plyer2Wins();
+            }
+        } else if (roundCount ==9) {
+            draw();
+        }else {
+            player1turn = !player1turn;
+        }
 
     }
 
     private boolean checkForWin() {
-        
+        String[][] field = new String[3][3];
+
+        for (int i=0; i<3; i++) {
+            for (int j=0; j<3; j++){
+                field[i][j] = buttons[i][j].getText().toString();
+            }
+        }
+
+        for (int i=0; i<3; i++) {
+            if (field[i][0].equals(field[i][1])
+                    && field[i][0].equals(field[i][2])
+                    && !field[i][0].equals("")) {
+                return true;
+            }
+        }
+
+        for (int i=0; i<3; i++) {
+            if (field[0][i].equals(field[1][i])
+                    && field[0][i].equals(field[2][i])
+                    && !field[0][i].equals("")) {
+                return true;
+            }
+        }
+        if (field[0][0].equals(field[1][1])
+                && field[0][0].equals(field[2][2])
+                && !field[0][0].equals("")) {
+            return true;
+        }
+        if (field[0][2].equals(field[1][1])
+                && field[0][2].equals(field[2][0])
+                && !field[0][2].equals("")) {
+            return true;
+        }
+
+        return false;
     }
+
+    private void player1Wins() {
+
+    }
+
+    private void plyer2Wins() {
+
+    }
+
+    private void draw() {
+
+    }
+    
 }
