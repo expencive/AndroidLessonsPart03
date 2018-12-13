@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
                 //.resizeDimen(R.dimen.image_size, R.dimen.image_size)
                 //.onlyScaleDown()
                 //.centerInside()
-                
                 .fit()
                 .into(imageView);
 
