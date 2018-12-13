@@ -17,7 +17,13 @@ public class MainActivity extends AppCompatActivity {
 
         String url = "https://cdn.pixabay.com/photo/2017/11/06/18/39/apple-2924531_960_720.jpg";
 
-        Picasso.with(this).load(url).into(imageView);
+        Picasso.with(this)
+                .load(url)
+                //.resizeDimen(R.dimen.image_size, R.dimen.image_size)
+                //.onlyScaleDown()
+                //.centerInside()
+                .fit()
+                .into(imageView);
 
     }
 }
