@@ -31,7 +31,7 @@ public class Upload {
         mName = name;
     }
 
-    public String grtImageUrl() {
+    public String getImageUrl() {
         return mImageUrl;
     }
 
