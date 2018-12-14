@@ -25,8 +25,8 @@
         android:id="@+id/image_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/progress_bar"
-        android:layout_below="@id/edit_text_file_name"
+        android:layout_above="@+id/progress_bar"
+        android:layout_below="@+id/edit_text_file_name"
         android:layout_marginTop="16dp" />
 
     <ProgressBar
