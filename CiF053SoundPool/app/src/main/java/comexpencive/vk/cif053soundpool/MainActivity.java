@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
                 soundPool.play(sound1, 1, 1, 0, 0, 1);
                 //soundPool.pause(sound6streamId);
                 soundPool.autoPause();
+                
                 break;
             case R.id.button_sound2:
                 soundPool.play(sound2, 1, 1, 0, 0, 1);
