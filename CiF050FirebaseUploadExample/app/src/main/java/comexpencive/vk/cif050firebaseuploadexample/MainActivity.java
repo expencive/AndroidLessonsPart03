@@ -135,6 +135,8 @@ public class MainActivity extends AppCompatActivity {
 
                     Toast.makeText(MainActivity.this, "Загружено успешно", Toast.LENGTH_SHORT).show();
 
+
+
                     Upload upload = new Upload(mEditTextFileName.getText().toString().trim(),
                             taskSnapshot.getDownloadUrl().toString());
 
@@ -155,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
                     mProgressBar.setProgress((int) progress);
                 }
             });
-            
+
         } else {
             Toast.makeText(this, "Файл не выбран", Toast.LENGTH_SHORT).show();
         }
