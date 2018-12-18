@@ -80,6 +80,7 @@ public class ImagesActivity extends AppCompatActivity implements ImageAdapter.On
     @Override
     public void onDeleteClick(int position) {
         Toast.makeText(this, "Delete click at position: " + position, Toast.LENGTH_SHORT).show();
+        
 
     }
 }
