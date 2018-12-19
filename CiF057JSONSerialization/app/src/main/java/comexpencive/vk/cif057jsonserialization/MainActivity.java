@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Gson gson = new Gson();
+        
 
         Address address = new Address("Germany", "Berlin");
         List<FamilyMember> family = new ArrayList<>();
