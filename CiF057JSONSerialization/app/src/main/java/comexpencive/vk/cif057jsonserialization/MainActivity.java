@@ -5,6 +5,9 @@ import android.os.Bundle;
 
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -15,7 +18,11 @@ public class MainActivity extends AppCompatActivity {
         Gson gson = new Gson();
 
         Address address = new Address("Germany", "Berlin");
-        Employee employee = new Employee("John", 32, "john@gmail.com", address);
+        List<FamilyMember> family = new ArrayList<>();
+        family.add(new FamilyMember("father", 40));
+        family.add(new FamilyMember("mother", 35));
+        family.add(new FamilyMember("son", 13));
+        Employee employee = new Employee("John", 32, "john@gmail.com", address, family);
 
         String json = gson.toJson(employee);
 
