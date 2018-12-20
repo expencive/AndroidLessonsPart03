@@ -2,8 +2,13 @@ package comexpencive.vk.quizapp;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import comexpencive.vk.quizapp.QuizContract.*;
 
 /**
@@ -61,5 +66,28 @@ public class QuizDBHelper extends SQLiteOpenHelper {
         cv.put(QuestionTable.COLUMN_OPTION3, question.getOption3());
         cv.put(QuestionTable.COLUMN_ANSWER_NR, question.getAnswerNr());
         db.insert(QuestionTable.TABLE_NAME, null,cv);
+    }
+
+    public List<Question> getAllQuestions() {
+        List<Question> questionList = new ArrayList<>();
+        db = getReadableDatabase();
+
+        Cursor c = db.rawQuery("SELECT * FROM " + QuestionTable.TABLE_NAME, null);
+
+        if (c.moveToFirst()) {
+            do{
+                Question question = new Question();
+                question.setQuestion(c.getString(c.getColumnIndex(QuestionTable.COLUMN_QUESTION)));
+                question.setOption1(c.getString(c.getColumnIndex(QuestionTable.COLUMN_OPTION1)));
+                question.setOption2(c.getString(c.getColumnIndex(QuestionTable.COLUMN_OPTION2)));
+                question.setOption3(c.getString(c.getColumnIndex(QuestionTable.COLUMN_OPTION3)));
+                question.setAnswerNr(c.getInt(c.getColumnIndex(QuestionTable.COLUMN_ANSWER_NR)));
+                questionList.add(question);
+
+
+            }while (c.moveToNext());
+        }
+        c.close();
+        return questionList;
     }
 }
