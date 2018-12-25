@@ -215,6 +215,7 @@ public class QuizActivity extends AppCompatActivity {
 
         if (countDownTimer !=null) {
             countDownTimer.cancel();
+            
         }
     }
 }
