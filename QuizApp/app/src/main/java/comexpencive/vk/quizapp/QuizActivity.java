@@ -1,5 +1,6 @@
 package comexpencive.vk.quizapp;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class QuizActivity extends AppCompatActivity {
+    public final static String EXTRA_SCORE = "extraScore";
+
     private TextView textViewQuestion;
     private TextView textViewScore;
     private TextView textViewQuestionCount;
@@ -140,6 +143,9 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     private void finishQuiz() {
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra(EXTRA_SCORE, score);
+        setResult(RESULT_OK, resultIntent);
         finish();
     }
 }
