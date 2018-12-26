@@ -13,7 +13,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Верно: 0"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:freezesText="true"/>
 
     <TextView
         android:id="@+id/text_view_question_count"
@@ -21,7 +22,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/text_view_score"
         android:text="Вопрос: 1/x"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:freezesText="true"/>
 
     <TextView
         android:id="@+id/text_view_countdown"
@@ -30,7 +32,8 @@
         android:layout_alignParentEnd="true"
         android:text="00:30"
         android:textColor="@android:color/black"
-        android:textSize="40sp" />
+        android:textSize="40sp"
+        android:freezesText="true"/>
 
     <TextView
         android:id="@+id/text_view_question"
@@ -41,7 +44,8 @@
         android:text="Here will be the question text\nHere will be the question text\nHere will be the question text"
         android:textAlignment="center"
         android:textColor="@android:color/black"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:freezesText="true"/>
 
     <RadioGroup
         android:id="@+id/radio_group"
@@ -57,7 +61,8 @@
             android:layout_height="wrap_content"
             android:text="Option 1"
             android:layout_above="@+id/radio_button2"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:freezesText="true"/>
 
         <RadioButton
             android:id="@+id/radio_button2"
@@ -65,7 +70,8 @@
             android:layout_height="wrap_content"
             android:text="Option 2"
             android:layout_above="@+id/radio_button3"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:freezesText="true"/>
 
 
         <RadioButton
@@ -75,7 +81,8 @@
             android:layout_above="@+id/button_confirm_next"
             android:layout_alignParentStart="true"
             android:layout_marginBottom="43dp"
-            android:text="Option 3" />
+            android:text="Option 3"
+            android:freezesText="true"/>
 
 
     </RadioGroup>
@@ -88,7 +95,8 @@
         android:layout_alignParentStart="true"
         android:layout_marginBottom="14dp"
         android:text="Далее"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:freezesText="true"/>
 
 
 </RelativeLayout>
