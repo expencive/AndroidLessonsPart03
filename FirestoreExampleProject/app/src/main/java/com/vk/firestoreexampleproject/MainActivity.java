@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(MainActivity.this, "Ошибка! Запись не сохранилась", Toast.LENGTH_SHORT).show();
                 Log.d(TAG, e.toString());
-
             }
         });
     }
