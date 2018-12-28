@@ -65,12 +65,10 @@ public class MainActivity extends AppCompatActivity {
                 }
                 
                 if (documentSnapshot.exists()) {
-                    String title = documentSnapshot.getString(KEY_TITLE);
-                    String description = documentSnapshot.getString(KEY_DESCRIPTION);
-
-                    
+                    Note note = documentSnapshot.toObject(Note.class);
+                    String title = note.getTitle();
+                    String description = note.getDescription();
                     textViewData.setText("Название: " + title + "\n" + "Описание: " + description);
-
                 }else {
                     textViewData.setText("");
                 }
@@ -85,9 +83,9 @@ public class MainActivity extends AppCompatActivity {
         String title = editTextTitle.getText().toString();
         String description = editTextDescription.getText().toString();
 
-        Map<String, Object> note = new HashMap<>();
-        note.put(KEY_TITLE, title);
-        note.put(KEY_DESCRIPTION, description);
+        Note note = new Note(title, description);
+
+
         noteRef.set(note)
         .addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
@@ -134,11 +132,9 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         if (documentSnapshot.exists()) {
-                            String title = documentSnapshot.getString(KEY_TITLE);
-                            String description = documentSnapshot.getString(KEY_DESCRIPTION);
-
-                            //Map<String, Object> note = documentSnapshot.getData(); // еще один путь получения данных
-
+                            Note note = documentSnapshot.toObject(Note.class);
+                            String title = note.getTitle();
+                            String description = note.getDescription();
                             textViewData.setText("Название: " + title + "\n" + "Описание: " + description);
 
                         } else{
