@@ -4,6 +4,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity2);
 
         textInputEmail = findViewById(R.id.text_input_email);
         textInputUserName = findViewById(R.id.text_input_username);
@@ -33,12 +34,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private boolean validaeUserName () {
-        String userName = textInputUserName.getEditText().getText().toString().trim();
-        if (userName.isEmpty()) {
+    private boolean validateUserName () {
+        String usernameImput = textInputUserName.getEditText().getText().toString().trim();
+        if (usernameImput.isEmpty()) {
             textInputUserName.setError("Поле не может быть пустым");
             return false;
-        } else if (userName.length()>15) {
+        } else if (usernameImput.length()>15) {
             textInputUserName.setError("Поле слишком большое");
             return false;
 
@@ -48,7 +49,30 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private boolean validatePassword() {
+        String passwordInput = textInputPassword.getEditText().getText().toString().trim();
+
+        if (passwordInput.isEmpty()) {
+            textInputPassword.setError("Поле не может быть пустым");
+            return false;
+        }else {
+            textInputPassword.setError(null);
+            return true;
+        }
+    }
+
     public void confirmInput(View v) {
+        if (!validateEmail() | !validateUserName() | !validatePassword()) {
+            return;
+        }
+        String input = "Email: " + textInputEmail.getEditText().getText().toString();
+        input += "\n";
+        input += "Username: " + textInputUserName.getEditText().getText().toString();
+        input += "\n";
+        input += "Password: " + textInputPassword.getEditText().getText().toString();
+
+        Toast.makeText(this, input, Toast.LENGTH_SHORT).show();
+
 
     }
 }
