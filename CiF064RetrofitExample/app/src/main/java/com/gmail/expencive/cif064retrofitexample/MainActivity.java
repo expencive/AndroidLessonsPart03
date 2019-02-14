@@ -16,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView textViewResult;
 
+    private JsonPlaceholderApi jsonPlaceholderApi;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,9 +30,59 @@ public class MainActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        JsonPlaceholderApi jsonPlaceholderApi = retrofit.create(JsonPlaceholderApi.class);
+        jsonPlaceholderApi = retrofit.create(JsonPlaceholderApi.class);
 
-        Call<List<Post>> call = jsonPlaceholderApi.getPosts();
+        getPosts();
+
+        //getComments();
+    }
+
+    private void getComments() {
+        Call<List<Comment>> call = jsonPlaceholderApi.getComments();
+        call.enqueue(new Callback<List<Comment>>() {
+            @Override
+            public void onResponse(Call<List<Comment>> call, Response<List<Comment>> response) {
+
+                if (!response.isSuccessful()) {
+                    textViewResult.setText("Code: " + response.code());
+                    return;
+                }
+
+                List<Comment> comments = response.body();
+
+                for (Comment comment: comments) {
+
+                    if (comment.getPostId()==2) {
+
+                        String content = "";
+
+                        content += "ID: " + comment.getId() + "\n";
+                        content += "Post Id: " + comment.getPostId() + "\n";
+                        content += "Name: " + comment.getName() + "\n";
+                        content += "Email: " + comment.getEmail() + "\n";
+
+                        content += "Text: " + comment.getText() + "\n\n";
+
+                        textViewResult.append(content);
+                    }
+
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Comment>> call, Throwable t) {
+
+                textViewResult.setText(t.getMessage());
+
+            }
+        });
+    }
+
+    private void getPosts(){
+
+        Call<List<Post>> call = jsonPlaceholderApi.getPosts(4);
 
         call.enqueue(new Callback<List<Post>>() {
             @Override
@@ -68,4 +120,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }
