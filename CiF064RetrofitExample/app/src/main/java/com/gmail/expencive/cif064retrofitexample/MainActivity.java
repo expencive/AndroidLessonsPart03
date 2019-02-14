@@ -4,7 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,13 +34,13 @@ public class MainActivity extends AppCompatActivity {
 
         jsonPlaceholderApi = retrofit.create(JsonPlaceholderApi.class);
 
-        getPosts();
+        //getPosts();
 
-        //getComments();
+        getComments();
     }
 
     private void getComments() {
-        Call<List<Comment>> call = jsonPlaceholderApi.getComments();
+        Call<List<Comment>> call = jsonPlaceholderApi.getComments("posts/2/comments");
         call.enqueue(new Callback<List<Comment>>() {
             @Override
             public void onResponse(Call<List<Comment>> call, Response<List<Comment>> response) {
@@ -52,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
                 for (Comment comment: comments) {
 
-                    if (comment.getPostId()==2) {
+                    //if (comment.getPostId()==2) {
 
                         String content = "";
 
@@ -64,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                         content += "Text: " + comment.getText() + "\n\n";
 
                         textViewResult.append(content);
-                    }
+                    //}
 
 
                 }
@@ -82,7 +84,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void getPosts(){
 
-        Call<List<Post>> call = jsonPlaceholderApi.getPosts(4);
+        Map<String, String> parameters = new HashMap<>();
+
+        parameters.put("userId", "1");
+        parameters.put("_sort", "id");
+        parameters.put("_order", "desc");
+
+        Call<List<Post>> call = jsonPlaceholderApi.getPosts(parameters/*new Integer[] {2,3,6},  null, null*/);
+        //если не хочется сортировать можно вместо в параметрах поставить null ('id", "desc")
 
         call.enqueue(new Callback<List<Post>>() {
             @Override
