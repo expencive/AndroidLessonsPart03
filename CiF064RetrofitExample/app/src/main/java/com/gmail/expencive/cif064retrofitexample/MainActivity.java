@@ -11,6 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -30,7 +32,14 @@ public class MainActivity extends AppCompatActivity {
 
         textViewResult = findViewById(R.id.text_view_result);
 
-       // Gson gson = new GsonBuilder().serializeNulls().create(); если есть задача использовать null  в проекте. он не будет игнорировать null
+       /*Gson gson = new GsonBuilder().serializeNulls().create(); //если есть задача использовать null  в проекте. он не будет игнорировать null
+
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .addInterceptor(loggingInterceptor)
+                .build();*/
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://jsonplaceholder.typicode.com/")
@@ -45,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
 
        // createPost();
 
-        //updatePost();
-        deletePost();
+        updatePost();
+        //deletePost();
     }
 
     private void getComments() {
@@ -185,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
     private void updatePost() {
         Post post = new Post(12, null, "New Text");
 
-        Call<Post> call = jsonPlaceholderApi.patchPost(2, post);
+        Call<Post> call = jsonPlaceholderApi.putPost(2, post);
 
         call.enqueue(new Callback<Post>() {
             @Override
