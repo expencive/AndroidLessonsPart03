@@ -16,31 +16,22 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView textViewResult;
 
-    private NewsService newsServiceApi;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        textViewResult = findViewById(R.id.text_view_result);
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://newsapi.org/")
-                .addConverterFactory(GsonConverterFactory.create(/*gson*/))
-                .build();
-
-        newsServiceApi = retrofit.create(NewsService.class);
-
 
     }
 
-    private void getNews() {
 
 
 
 
-    }
+
+
 }
