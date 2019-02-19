@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //Article articles = response.body();
 
-                List<Article> articles = response.body();
+                List<Article> articles = (List<Article>) response.body();
 
 
 
