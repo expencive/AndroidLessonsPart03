@@ -35,6 +35,9 @@ public interface JsonPlaceholderApi {
     @GET("posts/{id}/comments")
     Call<List<Comment>> getComments();
 
+    @GET("https://newsapi.org/v2/top-headlines?country=ru&apiKey=f2a63266ca464da6b6cf1778ce5aea1b")
+    Call<Article> getArticles();
+
     @GET
     Call<List<Comment>> getComments(@Url String url);
 

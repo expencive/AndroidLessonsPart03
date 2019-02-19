@@ -1,6 +1,12 @@
 package com.gmail.expencive.androidnewsapp.Model;
 
+import java.util.List;
+
 public class WebSite {
 
-    public String status;
+    private String status;
+
+    private int totalResults;
+
+
 }

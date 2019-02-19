@@ -4,15 +4,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -42,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                 .build();*/
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://jsonplaceholder.typicode.com/")
+                .baseUrl(/*"https://jsonplaceholder.typicode.com/"*/ "https://newsapi.org/")
                 .addConverterFactory(GsonConverterFactory.create(/*gson*/))
                 .build();
 
@@ -54,8 +50,58 @@ public class MainActivity extends AppCompatActivity {
 
        // createPost();
 
-        updatePost();
+        //updatePost();
         //deletePost();
+
+        getArticles();
+    }
+
+    private void getArticles() {
+        Call<Article> call = jsonPlaceholderApi.getArticles();
+
+        call.enqueue(new Callback<Article>() {
+            @Override
+            public void onResponse(Call<Article> call, Response<Article> response) {
+
+                if (!response.isSuccessful()) {
+                    textViewResult.setText("Code: " + response.code());
+                    return;
+                }
+
+
+                //Article articles = response.body();
+
+                List<Article> articles = response.body();
+
+
+
+                for (Article article: articles) {
+                    String content = "";
+
+                    content += "ID: " + article.getAuthor() + "\n";
+                    content += "Post Id: " + article.getDescription() + "\n";
+                    content += "Name: " + article.getTitle() + "\n";
+                    content += "Email: " + article.getUrl() + "\n";
+
+                    content += "Text: " + article.getUrlToimage() + "\n\n";
+
+                    textViewResult.append(content);
+
+                }
+
+
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<Article> call, Throwable t) {
+
+                textViewResult.setText(t.getMessage());
+
+            }
+        });
     }
 
     private void getComments() {
