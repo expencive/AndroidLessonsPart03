@@ -22,7 +22,8 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.gmail.expencive.androidnewsapp.models.Article;
-import com.gmail.expencive.androidnewsapp.models.Source;
+import com.gmail.expencive.androidnewsapp.models.SourceJSON;
+
 
 import java.util.List;
 
@@ -74,12 +75,16 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
                 }).transition(DrawableTransitionOptions.withCrossFade())
                 .into(holder.imageView);
 
-        Source source = (Source) model.getSource();
+
 
 
         holder.title.setText(model.getTitle());
         holder.desc.setText(model.getDescription());
-        holder.source.setText(source.getName());
+        holder.source.setText(model.getSource().getName());
+        //holder.source.setText(source.getName());
+        holder.time.setText(" \u2022 " + Utils.DateToTimeFormat(model.getPublishedAt()));
+        holder.publishedAt.setText(Utils.DateFormat(model.getPublishedAt()));
+        holder.author.setText(model.getAuthor());
 
 
 
@@ -89,7 +94,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
 
     @Override
     public int getItemCount() {
-        return 0;
+        return articles.size();
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {

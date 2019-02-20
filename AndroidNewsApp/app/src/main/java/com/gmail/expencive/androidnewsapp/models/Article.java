@@ -9,7 +9,7 @@ public class Article {
 
     @SerializedName("source")
     @Expose
-    private Source source;
+    private SourceJSON source;
 
     @SerializedName("author")
     @Expose
@@ -36,11 +36,11 @@ public class Article {
     private String publishedAt;
 
 
-    public Source getSource() {
+   public SourceJSON getSource() {
         return source;
     }
 
-    public void setSource(Source source) {
+    public void setSource(SourceJSON source) {
         this.source = source;
     }
 

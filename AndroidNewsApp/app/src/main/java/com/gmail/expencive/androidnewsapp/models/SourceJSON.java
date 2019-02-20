@@ -3,7 +3,7 @@ package com.gmail.expencive.androidnewsapp.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Source {
+public class SourceJSON {
 
     @SerializedName("id")
     @Expose
