@@ -2,6 +2,7 @@ package com.gmail.expencive.androidnewsapp;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -12,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,14 +32,16 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
     public static final String API_KEY = "f2a63266ca464da6b6cf1778ce5aea1b";
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private List<Article> articles = new ArrayList<>();
     private Adapter adapter;
     private String TAG = MainActivity.class.getSimpleName();
-    private TextView textView;
+    private TextView topHeadline;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private String mQuery = "";
 
 
 
@@ -47,19 +51,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener((SwipeRefreshLayout.OnRefreshListener) this);
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
+
         recyclerView = findViewById(R.id.recyclerView);
         layoutManager = new LinearLayoutManager(MainActivity.this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setNestedScrollingEnabled(false);
-        textView = findViewById(R.id.textHeadline);
+        topHeadline = findViewById(R.id.textHeadline);
 
-        loadJson("");
+        onLoadingSwipeRefresh("");
 
 
     }
 
     public void loadJson(final String keyword) {
+        topHeadline.setVisibility(View.INVISIBLE);
+        swipeRefreshLayout.setRefreshing(true);
         ApiInterface apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
         String country = Utils.getCountry();
 
@@ -84,6 +94,9 @@ public class MainActivity extends AppCompatActivity {
                     adapter = new Adapter(articles, MainActivity.this);
                     recyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
+                    topHeadline.setVisibility(View.VISIBLE);
+
+                    swipeRefreshLayout.setRefreshing(false);
 
                     /*for (Article article: articles) {
 
@@ -102,13 +115,15 @@ public class MainActivity extends AppCompatActivity {
                     }*/
                     
                 }else {
+                    topHeadline.setVisibility(View.INVISIBLE);
+                    swipeRefreshLayout.setRefreshing(false);
                     Toast.makeText(MainActivity.this, "No result", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<News> call, Throwable t) {
-                textView.setText(t.getLocalizedMessage());
+                topHeadline.setText(t.getLocalizedMessage());
 
 
             }
@@ -128,7 +143,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 if (query.length() > 2) {
-                    loadJson(query);
+                    mQuery = query;
+                    onLoadingSwipeRefresh(query);
                 }
 
                 return false;
@@ -136,7 +152,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                loadJson(newText);
                 return false;
             }
         });
@@ -145,5 +160,21 @@ public class MainActivity extends AppCompatActivity {
 
         return true;
 
+    }
+
+    @Override
+    public void onRefresh() {
+        onLoadingSwipeRefresh(mQuery);
+        mQuery = "";
+    }
+
+    public void onLoadingSwipeRefresh(final String keyword) {
+        swipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                loadJson(keyword);
+
+            }
+        });
     }
 }
