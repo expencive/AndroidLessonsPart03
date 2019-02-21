@@ -198,39 +198,5 @@
 
     </android.support.v4.widget.NestedScrollView>
 
-    <FrameLayout
-        android:id="@+id/date_behavior"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/img"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="410dp"
-        android:adjustViewBounds="true"
-        android:background="@drawable/round_white"
-        android:clickable="false"
-        android:padding="5dp"
-        android:behavior_autoHide="true"
-        app:layout_anchor="@+id/appbar"
-        app:layout_anchorGravity="right|end|bottom"
-        tools:ignore="UnusedAttribute">
-
-        <ImageView
-            android:layout_width="18dp"
-            android:layout_height="18dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:src="@drawable/ic_date" />
-
-        <TextView
-            android:id="@+id/date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="27dp"
-            android:layout_marginRight="10dp"
-            android:text="01 January 1990"
-            android:textColor="#606060" />
-    </FrameLayout>
 
 </android.support.design.widget.CoordinatorLayout>
