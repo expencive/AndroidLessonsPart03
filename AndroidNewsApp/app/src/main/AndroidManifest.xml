@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".NewsDetailActivity"></activity>
+            android:name=".NewsDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar."></activity>
     </application>
 
 

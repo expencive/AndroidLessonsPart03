@@ -21,15 +21,15 @@ import com.bumptech.glide.request.RequestOptions;
 import static java.lang.System.load;
 
 
-public class NewsDetailActivity extends AppCompatActivity /*implements AppBarLayout.OnOffsetChangedListener*/ {
+public class NewsDetailActivity extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener {
 
     private ImageView imageView;
     private TextView appbar_title, appbar_subtitle, date, time, title;
     private boolean isHideToBarView;
-    //private FrameLayout dateBehavior;
-    //private LinearLayout tittleAppbar;
-    //private AppBarLayout appBarLayout;
-    //private Toolbar toolbar;
+    //private FrameLayout dateBehavior;//
+    private LinearLayout tittleAppbar;//
+    private AppBarLayout appBarLayout;//
+    private Toolbar toolbar;//
     private String mUrl, mImg, mTitle, mDate, mSource, mAuthor;
 
     @Override
@@ -37,19 +37,19 @@ public class NewsDetailActivity extends AppCompatActivity /*implements AppBarLay
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_detail);
 
-        //toolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
-        //getSupportActionBar().setTitle("");
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar = findViewById(R.id.toolbar);//
+        setSupportActionBar(toolbar);//
+        getSupportActionBar().setTitle("");//
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);//
 
-        //final CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
-        //collapsingToolbarLayout.setTitle("");
+        final CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);//
+        collapsingToolbarLayout.setTitle("");//
 
-        //appBarLayout = findViewById(R.id.appbar);
-        //appBarLayout.addOnOffsetChangedListener(this);
+        appBarLayout = findViewById(R.id.appbar);
+        appBarLayout.addOnOffsetChangedListener(this);//
 
-        //dateBehavior = findViewById(R.id.date_behavior);
-        //tittleAppbar = findViewById(R.id.title_appbar);
+        //dateBehavior = findViewById(R.id.date_behavior);//
+        tittleAppbar = findViewById(R.id.title_appbar);
         imageView = findViewById(R.id.backdrop);
         appbar_title = findViewById(R.id.title_on_appbar);
         appbar_subtitle = findViewById(R.id.subtitle_on_appbar);
@@ -76,7 +76,7 @@ public class NewsDetailActivity extends AppCompatActivity /*implements AppBarLay
 
         appbar_title.setText(mSource);
         appbar_subtitle.setText(Utils.DateFormat(mDate));
-        //date.setText(Utils.DateFormat(mDate));
+        //date.setText(Utils.DateFormat(mDate));//
         title.setText(mTitle);
 
         String author = null;
@@ -120,20 +120,20 @@ public class NewsDetailActivity extends AppCompatActivity /*implements AppBarLay
         return super.onSupportNavigateUp();
     }
 
-    /*@Override
+    @Override
     public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
         int maxScroll = appBarLayout.getTotalScrollRange();
         float percentage = (float) Math.abs(verticalOffset)/ (float) maxScroll;
 
         if (percentage==1f && isHideToBarView) {
-            //dateBehavior.setVisibility(View.GONE);
-            //tittleAppbar.setVisibility(View.VISIBLE);
-            //isHideToBarView = !isHideToBarView;
+            //dateBehavior.setVisibility(View.GONE);//
+            tittleAppbar.setVisibility(View.VISIBLE);
+            isHideToBarView = !isHideToBarView;//
         }else if(percentage<1f && isHideToBarView) {
-            //dateBehavior.setVisibility(View.VISIBLE);
-           // tittleAppbar.setVisibility(View.GONE);
-            //isHideToBarView = !isHideToBarView;
+            //dateBehavior.setVisibility(View.VISIBLE);//
+           tittleAppbar.setVisibility(View.GONE);
+            isHideToBarView = !isHideToBarView;//
 
         }
-    }*/
+    }
 }
