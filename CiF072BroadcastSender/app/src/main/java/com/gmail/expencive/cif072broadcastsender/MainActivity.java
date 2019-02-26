@@ -1,6 +1,7 @@
 package com.gmail.expencive.cif072broadcastsender;
 
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -22,28 +23,17 @@ public class MainActivity extends AppCompatActivity {
 
     public void sendBroadcast(View v) {
         Intent intent = new Intent("com.gmail.expencive.EXAMPLE_ACTION");
-        intent.putExtra("com.gmail.expencive.EXTRA_TEXT", "Broadcast received");
+        //intent.setClass(this, ExampleBroadcastReceiver2.class);
+
+        /*ComponentName cn = new ComponentName("com.gmail.expencive.cif071broadcastrecievers",
+                "com.gmail.expencive.cif071broadcastrecievers.ExampleBroadcastReceiver");
+       intent.setComponent(cn);*/
+        /*intent.setClassName("com.gmail.expencive.cif071broadcastrecievers",
+                "com.gmail.expencive.cif071broadcastrecievers.ExampleBroadcastReceiver")*/
+
+        intent.setPackage("com.gmail.expencive.cif071broadcastrecievers")
         sendBroadcast(intent);
     }
 
-    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String receivedText = intent.getStringExtra("com.gmail.expencive.EXTRA_TEXT");
-            textView.setText(receivedText);
-        }
-    };
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        IntentFilter filter = new IntentFilter("com.gmail.expencive.EXAMPLE_ACTION");
-        registerReceiver(broadcastReceiver, filter);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        unregisterReceiver(broadcastReceiver);
-    }
 }

@@ -10,9 +10,6 @@ public class ExampleBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        if ("com.gmail.expencive.EXAMPLE_ACTION".equals(intent.getAction())) {
-            String recievedText = intent.getStringExtra("com.gmail.expencive.EXTRA_TEXT");
-            Toast.makeText(context, recievedText, Toast.LENGTH_SHORT).show();
-        }
+        Toast.makeText(context, "EBR trigered", Toast.LENGTH_SHORT).show();
     }
 }
