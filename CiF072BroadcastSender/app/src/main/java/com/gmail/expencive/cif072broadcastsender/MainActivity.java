@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void sendBroadcast(View v) {
         Intent intent = new Intent("com.gmail.expencive.EXAMPLE_ACTION");
+
         //intent.setClass(this, ExampleBroadcastReceiver2.class);
 
         /*ComponentName cn = new ComponentName("com.gmail.expencive.cif071broadcastrecievers",
@@ -31,8 +32,12 @@ public class MainActivity extends AppCompatActivity {
         /*intent.setClassName("com.gmail.expencive.cif071broadcastrecievers",
                 "com.gmail.expencive.cif071broadcastrecievers.ExampleBroadcastReceiver")*/
 
-        intent.setPackage("com.gmail.expencive.cif071broadcastrecievers")
-        sendBroadcast(intent);
+        intent.setPackage("com.gmail.expencive.cif071broadcastrecievers");
+
+        Bundle extras = new Bundle();
+        extras.putString("stringExtra", "Start");
+        sendOrderedBroadcast(intent, null, new SenderReceiver(),
+                null, 0, "Start", extras);
     }
 
 
