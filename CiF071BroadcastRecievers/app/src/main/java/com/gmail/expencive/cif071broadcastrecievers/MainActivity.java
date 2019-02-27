@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
         IntentFilter filter = new IntentFilter("com.gmail.expencive.EXAMPLE_ACTION");
         filter.setPriority(0);
-        registerReceiver(orderedReceiver1, filter);
+        registerReceiver(orderedReceiver1, filter, Manifest.permission.CUSTOM_PERMISSION, null);
 
 
     }
