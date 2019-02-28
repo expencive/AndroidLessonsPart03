@@ -2,9 +2,7 @@ package com.gmail.expencive.androidnewsapp;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-
 import org.ocpsoft.prettytime.PrettyTime;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;

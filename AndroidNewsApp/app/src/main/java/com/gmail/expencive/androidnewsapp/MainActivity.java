@@ -18,9 +18,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 
 import com.gmail.expencive.androidnewsapp.api.ApiClient;
@@ -34,8 +36,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+
 
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
     public static final String API_KEY = "f2a63266ca464da6b6cf1778ce5aea1b";
@@ -44,9 +45,12 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private List<Article> articles = new ArrayList<>();
     private Adapter adapter;
     private String TAG = MainActivity.class.getSimpleName();
-    private TextView topHeadline;
     private SwipeRefreshLayout swipeRefreshLayout;
     private String mQuery = "";
+    private RelativeLayout errorLayout;
+    private ImageView errorImage;
+    private TextView errorTitle, errorMessage;
+    private Button buttonRetry;
 
 
 
@@ -65,15 +69,21 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setNestedScrollingEnabled(false);
-        topHeadline = findViewById(R.id.textHeadline);
+
 
         onLoadingSwipeRefresh("");
+
+        errorLayout = findViewById(R.id.error_layout);
+        errorImage = findViewById(R.id.error_image);
+        errorTitle = findViewById(R.id.error_title);
+        errorMessage = findViewById(R.id.error_message);
+        buttonRetry = findViewById(R.id.button_retry);
 
 
     }
 
     public void loadJson(final String keyword) {
-        topHeadline.setVisibility(View.INVISIBLE);
+        errorLayout.setVisibility(View.GONE);
         swipeRefreshLayout.setRefreshing(true);
         ApiInterface apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
         String country = Utils.getCountry();
@@ -91,10 +101,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             @Override
             public void onResponse(Call<News> call, Response<News> response) {
                 if (response.isSuccessful() && response.body().getArticle() !=null) {
-                    /*if (!articles.isEmpty()) {
-                        articles.clear();
-                    }*/
-
                     articles = response.body().getArticle();
                     adapter = new Adapter(articles, MainActivity.this);
                     recyclerView.setAdapter(adapter);
@@ -102,36 +108,32 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
                     initListener();
 
-                    topHeadline.setVisibility(View.VISIBLE);
-
                     swipeRefreshLayout.setRefreshing(false);
-
-                    /*for (Article article: articles) {
-
-                        String content = "";
-
-                        content += "Author: " + article.getAuthor() + "\n";
-                        content += "Description: " + article.getDescription() + "\n";
-                        content += "Title: " + article.getTitle() + "\n";
-                        content += "Email: " + article.getPublishedAt() + "\n";
-
-                        content += "Image: " + article.getUrlToimage() + "\n\n";
-
-                        textView.append(content);
-
-
-                    }*/
                     
                 }else {
-                    topHeadline.setVisibility(View.INVISIBLE);
                     swipeRefreshLayout.setRefreshing(false);
-                    Toast.makeText(MainActivity.this, "No result", Toast.LENGTH_SHORT).show();
+                    String errorCode;
+                    switch (response.code()) {
+                        case 404:
+                            errorCode = "404. Страница не найдена или удалена";
+                            break;
+                        case 500:
+                            errorCode = "500. Сервер не отвечает";
+                            break;
+                         default:
+                             errorCode = "Неизвестная ошибка";
+                             break;
+                    }
+
+                    showErrorMessage(R.drawable.no_result, "Произошла ошибка",
+                             errorCode);
                 }
             }
 
             @Override
             public void onFailure(Call<News> call, Throwable t) {
-                topHeadline.setText(t.getLocalizedMessage());
+                showErrorMessage(R.drawable.no_result, "Произошла ошибка",
+                        "Кажется что-то не так с сетевым соединением... \n" + t.toString());
 
 
             }
@@ -152,12 +154,11 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 intent.putExtra("img", article.getUrlToimage());
                 intent.putExtra("date", article.getPublishedAt());
                 intent.putExtra("source", article.getSource().getName());
-                intent.putExtra("author", article.getAuthor());
 
                 Pair<View, String> pair = Pair.create((View) imageView, ViewCompat.getTransitionName(imageView));
                 ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this, pair);
 
-                
+
                 startActivity(intent, optionsCompat.toBundle());
 
             }
@@ -211,5 +212,24 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
             }
         });
+    }
+
+    private void showErrorMessage(int imageView, String title, String message){
+
+        if (errorLayout.getVisibility()==View.GONE) {
+            errorLayout.setVisibility(View.VISIBLE);
+        }
+
+        errorImage.setImageResource(imageView);
+        errorTitle.setText(title);
+        errorMessage.setText(message);
+
+        buttonRetry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onLoadingSwipeRefresh(mQuery);
+            }
+        });
+
     }
 }

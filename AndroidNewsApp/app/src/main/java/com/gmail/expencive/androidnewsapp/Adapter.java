@@ -84,7 +84,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
         //holder.source.setText(source.getName());
         holder.time.setText(" \u2022 " + Utils.DateToTimeFormat(model.getPublishedAt()));
         holder.publishedAt.setText(Utils.DateFormat(model.getPublishedAt()));
-        holder.author.setText(model.getAuthor());
+
 
 
 
@@ -118,7 +118,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
             itemView.setOnClickListener(this);
             title = itemView.findViewById(R.id.title);
             desc = itemView.findViewById(R.id.desc);
-            author = itemView.findViewById(R.id.author);
             publishedAt=itemView.findViewById(R.id.publishedAt);
             source = itemView.findViewById(R.id.source);
             time = itemView.findViewById(R.id.time);
