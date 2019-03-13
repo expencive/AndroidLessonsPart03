@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().setElevation(5);
+
 
         FloatingActionButton buttonAddNote = findViewById(R.id.button_add_note);
         buttonAddNote.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 noteViewModel.delete(adapter.getNoteAt(viewHolder.getAdapterPosition()));
-                Toast.makeText(MainActivity.this, "Note Deleted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Задача завершена", Toast.LENGTH_SHORT).show();
 
             }
         }).attachToRecyclerView(recyclerView);
@@ -96,12 +98,12 @@ public class MainActivity extends AppCompatActivity {
             Note note = new Note(title, description, priority);
             noteViewModel.insert(note);
 
-            Toast.makeText(this, "Note Saved", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Задача сохранена", Toast.LENGTH_SHORT).show();
         } else if (requestCode == EDIT_NOTE_REQUEST && resultCode == RESULT_OK){
             int id = data.getIntExtra(AddEditNoteActivity.EXTRA_ID, -1);
 
             if (id == -1) {
-                Toast.makeText(this, "Note can not be updated", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Не удалось изменить задачу", Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -114,11 +116,11 @@ public class MainActivity extends AppCompatActivity {
 
             noteViewModel.update(note);
 
-            Toast.makeText(this, "Note updated", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Задача изменена", Toast.LENGTH_SHORT).show();
 
         }
             else {
-            Toast.makeText(this, "Note not saved", Toast.LENGTH_SHORT).show();
+
         }
     }
 
@@ -135,11 +137,12 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.delete_all_notes:
                 noteViewModel.deleteAllNotes();
-                Toast.makeText(this, "All notes deleted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Все задачи завершены", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
 
     }
+
 }

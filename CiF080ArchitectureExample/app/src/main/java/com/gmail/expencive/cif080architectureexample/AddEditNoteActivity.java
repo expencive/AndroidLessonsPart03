@@ -37,19 +37,19 @@ public class AddEditNoteActivity extends AppCompatActivity {
         numberPickerPriority = findViewById(R.id.number_picker_priority);
 
         numberPickerPriority.setMinValue(1);
-        numberPickerPriority.setMaxValue(20);
+        numberPickerPriority.setMaxValue(5);
 
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back);
 
         Intent intent = getIntent();
 
         if (intent.hasExtra(EXTRA_ID)) {
-            setTitle("EditNote");
+            setTitle("Изменить задачу");
             editTextTitle.setText(intent.getStringExtra(EXTRA_TITLE));
             editTextDescription.setText(intent.getStringExtra(EXTRA_DESCRIPTION));
             numberPickerPriority.setValue(intent.getIntExtra(EXTRA_PRIORITY, 1));
         } else {
-            setTitle("Add Note");
+            setTitle("Добавить задачу");
         }
     }
 
@@ -58,8 +58,8 @@ public class AddEditNoteActivity extends AppCompatActivity {
         String description = editTextDescription.getText().toString();
         int priority = numberPickerPriority.getValue();
 
-        if (title.trim().isEmpty() || description.trim().isEmpty()) {
-            Toast.makeText(this, "Please insert a title and description", Toast.LENGTH_SHORT).show();
+        if (title.trim().isEmpty()) {
+            Toast.makeText(this, "Пожалуйста, внесите задание", Toast.LENGTH_SHORT).show();
             return;
 
         }

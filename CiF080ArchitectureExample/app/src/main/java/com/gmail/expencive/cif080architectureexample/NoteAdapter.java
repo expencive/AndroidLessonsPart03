@@ -1,5 +1,6 @@
 package com.gmail.expencive.cif080architectureexample;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +51,27 @@ public class NoteAdapter extends ListAdapter<Note, NoteAdapter.NoteHolder> {
         holder.textViewDescription.setText(currentNote.getDescription());
         holder.textViewPriority.setText(String.valueOf(currentNote.getPriority()));
 
+        switch (currentNote.getPriority()){
+            case 1:
+                holder.itemView.setBackgroundColor(Color.parseColor("#E0F7FA"));
+                break;
+            case 2:
+                holder.itemView.setBackgroundColor(Color.parseColor("#E8F5E9"));
+                break;
+            case 3:
+                holder.itemView.setBackgroundColor(Color.parseColor("#F9FBE7"));
+                break;
+            case 4:
+                holder.itemView.setBackgroundColor(Color.parseColor("#FBE9E7"));
+                break;
+            case 5:
+                holder.itemView.setBackgroundColor(Color.parseColor("#FDDEE8"));
+                break;
+
+        }
+
+
+
     }
 
 
@@ -67,9 +89,12 @@ public class NoteAdapter extends ListAdapter<Note, NoteAdapter.NoteHolder> {
         public NoteHolder(@NonNull final View itemView) {
             super(itemView);
 
+
+
             textViewTitle = itemView.findViewById(R.id.text_view_title);
             textViewDescription = itemView.findViewById(R.id.text_view_id_description);
             textViewPriority = itemView.findViewById(R.id.text_view_priority);
+
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
