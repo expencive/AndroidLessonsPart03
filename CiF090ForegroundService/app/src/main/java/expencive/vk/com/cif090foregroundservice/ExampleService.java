@@ -32,7 +32,7 @@ public class ExampleService extends Service {
 
         CountDownTimer countDownTimer;
 
-        countDownTimer = new CountDownTimer(60000, 1000) {
+        countDownTimer = new CountDownTimer(Integer.parseInt(input), 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                String inputv = String.valueOf(millisUntilFinished);
@@ -43,6 +43,8 @@ public class ExampleService extends Service {
 
             @Override
             public void onFinish() {
+                stopSelf();
+                Toast.makeText(ExampleService.this, "Time is over", Toast.LENGTH_SHORT).show();
 
 
             }
