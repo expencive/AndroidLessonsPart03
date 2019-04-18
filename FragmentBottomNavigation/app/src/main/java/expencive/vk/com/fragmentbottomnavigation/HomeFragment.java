@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import expencive.vk.com.fragmentbottomnavigation.adapter.AnimalAdapter;
 import expencive.vk.com.fragmentbottomnavigation.api.ApiClient;
 import expencive.vk.com.fragmentbottomnavigation.api.ApiInterface;
 import expencive.vk.com.fragmentbottomnavigation.models.Animal;
@@ -24,13 +26,16 @@ import retrofit2.Response;
 
 public class HomeFragment extends Fragment {
     private TextView textViewResultHome;
+    private RecyclerView mRecyclerView;
+    private AnimalAdapter mAnimalAdapter;
+    private ArrayList<Animal> mAnimalList;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
-        textViewResultHome = rootView.findViewById(R.id.text_view_result_home);
+        //textViewResultHome = rootView.findViewById(R.id.text_view_result_home);
 
         return rootView;
 
@@ -58,6 +63,9 @@ public class HomeFragment extends Fragment {
             @Override
             public void onResponse(Call<Animals> call, Response<Animals> response) {
                 if (response.isSuccessful() && response.body().getAnimalList()!=null) {
+                    mAnimalList = new ArrayList<>();
+
+                    mAnimalList = (ArrayList<Animal>) response.body().getAnimalList();
 
                     List<Animal> animals = new ArrayList<>();
                     animals = response.body().getAnimalList();
@@ -65,19 +73,23 @@ public class HomeFragment extends Fragment {
 
 
 
-                    for (Animal animal: animals){
+//                    for (Animal animal: animals){
+//
+//
+//
+//                        content += "ImageUrl: " + animal.getImageUrl() + "\n";
+//                        content += "Title: " + animal.getImageTitle() + "\n\n";
+//
+//
+//
+//
+//                    }
 
+                    //textViewResultHome.setText(content);
 
+                    mAnimalAdapter = new AnimalAdapter(getContext(), mAnimalList);
+                    mRecyclerView.setAdapter(mAnimalAdapter);
 
-                        content += "ImageUrl: " + animal.getImageUrl() + "\n";
-                        content += "Title: " + animal.getImageTitle() + "\n\n";
-
-
-
-
-                    }
-
-                    textViewResultHome.setText(content);
 
 
 

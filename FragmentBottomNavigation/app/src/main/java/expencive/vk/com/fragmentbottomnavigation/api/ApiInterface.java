@@ -12,6 +12,6 @@ public interface ApiInterface {
 
 
 
-    @GET("api.php")
-    Call<Animals> getDogs(@Query("dog") String dog);
+    @GET("api.php?query=dog")
+    Call<Animals> getDogs();
 }
