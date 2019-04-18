@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import expencive.vk.com.fragmentbottomnavigation.adapter.AnimalAdapter;
 import expencive.vk.com.fragmentbottomnavigation.api.ApiClient;
 import expencive.vk.com.fragmentbottomnavigation.api.ApiInterface;
 import expencive.vk.com.fragmentbottomnavigation.models.Animal;
@@ -25,12 +28,16 @@ public class FavoritsFragment extends Fragment {
 
     private TextView textViewResultHome;
 
+    private RecyclerView mRecyclerView;
+    private AnimalAdapter mAnimalAdapter;
+    private ArrayList<Animal> mAnimalList;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_favorits, container, false);
 
-        textViewResultHome = rootView.findViewById(R.id.text_view_result_favorits);
+        mRecyclerView = rootView.findViewById(R.id.recycler_view_favorits);
 
         return rootView;
 
@@ -41,6 +48,8 @@ public class FavoritsFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         loadJson();
+
+
 
 
     }
@@ -61,23 +70,14 @@ public class FavoritsFragment extends Fragment {
 
                     List<Animal> animals = new ArrayList<>();
                     animals = response.body().getAnimalList();
-                    String content = "";
+                    mAnimalList = (ArrayList<Animal>) animals;
+
+                    mAnimalAdapter = new AnimalAdapter(getContext(), mAnimalList);
+                    mRecyclerView.setAdapter(mAnimalAdapter);
+                    mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                    mAnimalAdapter.notifyDataSetChanged();
 
 
-
-                    for (Animal animal: animals){
-
-
-
-                        content += "ImageUrl: " + animal.getImageUrl() + "\n";
-                        content += "Title: " + animal.getImageTitle() + "\n\n";
-
-
-
-
-                    }
-
-                    textViewResultHome.setText(content);
 
 
 

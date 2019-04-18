@@ -11,9 +11,6 @@
         android:icon="@drawable/ic_favorite"
         android:title="Favorite"/>
 
-    <item
-        android:id="@+id/nav_search"
-        android:icon="@drawable/ic_launcher_background"
-        android:title="Search"/>
+
 
 </menu>
