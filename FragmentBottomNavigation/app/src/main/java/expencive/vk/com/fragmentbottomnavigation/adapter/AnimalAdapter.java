@@ -13,6 +13,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import expencive.vk.com.fragmentbottomnavigation.HomeFragment;
+import expencive.vk.com.fragmentbottomnavigation.MainActivity;
 import expencive.vk.com.fragmentbottomnavigation.R;
 import expencive.vk.com.fragmentbottomnavigation.models.Animal;
 
@@ -26,6 +28,8 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.AnimalView
     public interface OnItemClickListener {
         void onItemClick(int position);
     }
+
+
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         mListener = listener;
@@ -62,15 +66,22 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.AnimalView
 
     }
 
+
+
     @Override
     public int getItemCount() {
         return mAnimalList.size();
     }
 
+
+
     public class AnimalViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView mImageView;
         public TextView mTextViewNumber, mTextViewTitle;
+
+
+
 
         public AnimalViewHolder(View itemView) {
             super(itemView);

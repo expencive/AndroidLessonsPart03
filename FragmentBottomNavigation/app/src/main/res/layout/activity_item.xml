@@ -5,14 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".DetailActivity">
-    
+    tools:context=".ItemActivity">
+
 
     <ImageView
         android:id="@+id/image_view_detail"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:src="@android:mipmap/sym_def_app_icon"
         />
 
     <TextView

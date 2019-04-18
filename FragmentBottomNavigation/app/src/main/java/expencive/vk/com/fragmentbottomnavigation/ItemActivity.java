@@ -1,8 +1,8 @@
 package expencive.vk.com.fragmentbottomnavigation;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,7 +12,7 @@ import static expencive.vk.com.fragmentbottomnavigation.HomeFragment.EXTRA_NUMBE
 import static expencive.vk.com.fragmentbottomnavigation.HomeFragment.EXTRA_TITLE;
 import static expencive.vk.com.fragmentbottomnavigation.HomeFragment.EXTRA_URL;
 
-public class DetailActivity extends AppCompatActivity {
+public class ItemActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
