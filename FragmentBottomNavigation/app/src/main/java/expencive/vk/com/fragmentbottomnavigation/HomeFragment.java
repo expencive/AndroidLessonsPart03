@@ -104,11 +104,11 @@ public class HomeFragment extends Fragment implements AnimalAdapter.OnItemClickL
                         @Override
                         public void onItemClick(int position) {
                             Intent detailIntent = new Intent(getContext(), ItemActivity.class);
-//                            Animal clickedItem = mAnimalList.get(position);
-//
-//                            detailIntent.putExtra(EXTRA_URL, clickedItem.getImageUrl());
-//                            detailIntent.putExtra(EXTRA_NUMBER, clickedItem.getImageTitle());
-//                            detailIntent.putExtra(Intent.EXTRA_TITLE, String.valueOf(position+1));
+                            Animal clickedItem = mAnimalList.get(position);
+
+                            detailIntent.putExtra(EXTRA_URL, clickedItem.getImageUrl());
+                            detailIntent.putExtra(EXTRA_NUMBER, String.valueOf(position+1));
+                            detailIntent.putExtra(EXTRA_TITLE, clickedItem.getImageTitle());
 
                             startActivity(detailIntent);
                         }
@@ -150,16 +150,7 @@ public class HomeFragment extends Fragment implements AnimalAdapter.OnItemClickL
     }
 
 
-//    public void onItemClick(int position) {
-//        Intent detailIntent = new Intent(getContext(), DetailActivity.class);
-//        Animal clickedItem = mAnimalList.get(position);
-//
-//        detailIntent.putExtra(EXTRA_URL, clickedItem.getImageUrl());
-//        detailIntent.putExtra(EXTRA_NUMBER, clickedItem.getImageTitle());
-//        detailIntent.putExtra(Intent.EXTRA_TITLE, String.valueOf(position+1));
-//
-//        startActivity(detailIntent);
-//    }
+
 
 
 }

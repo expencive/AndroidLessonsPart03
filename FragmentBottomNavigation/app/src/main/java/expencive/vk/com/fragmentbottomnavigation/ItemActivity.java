@@ -17,19 +17,19 @@ public class ItemActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
+        setContentView(R.layout.activity_item);
 
         Intent intent = getIntent();
         String imageUrl = intent.getStringExtra(EXTRA_URL);
         String number = intent.getStringExtra(EXTRA_NUMBER);
-        int title = intent.getIntExtra(EXTRA_TITLE, 0);
+        String title = intent.getStringExtra(EXTRA_TITLE);
 
         ImageView imageView = (ImageView) findViewById(R.id.image_view_detail);
-        TextView textViewCreator = (TextView) findViewById(R.id.text_view_number_detail);
-        TextView textViewLikes = (TextView) findViewById(R.id.text_view_title_detail);
+        TextView textViewNumber = (TextView) findViewById(R.id.text_view_number_detail);
+        TextView textViewTitle = (TextView) findViewById(R.id.text_view_title_detail);
 
         Picasso.get().load(imageUrl).fit().centerInside().into(imageView);
-        textViewCreator.setText(number);
-        textViewLikes.setText(title);
+        textViewNumber.setText(number);
+        textViewTitle.setText(title);
     }
 }
