@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -27,15 +28,21 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeFragment extends Fragment implements AnimalAdapter.OnItemClickListener{
+public class HomeFragment extends Fragment{
     public static final String EXTRA_URL = "imageUrl";
     public static final String EXTRA_NUMBER = "number";
     public static final String EXTRA_TITLE = "title";
 
-    private TextView textViewResultHome;
+
     private RecyclerView mRecyclerView;
     private AnimalAdapter mAnimalAdapter;
     private ArrayList<Animal> mAnimalList;
+
+    public static int index = -1;
+    public static int top = -1;
+    RecyclerView.LayoutManager mLayoutManager;
+
+
 
 
 
@@ -45,6 +52,10 @@ public class HomeFragment extends Fragment implements AnimalAdapter.OnItemClickL
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
         mRecyclerView = rootView.findViewById(R.id.recycler_view);
+
+        mLayoutManager = new LinearLayoutManager(getContext());
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(mLayoutManager);
 
         return rootView;
 
@@ -79,27 +90,11 @@ public class HomeFragment extends Fragment implements AnimalAdapter.OnItemClickL
                     List<Animal> animals = new ArrayList<>();
                     animals = response.body().getAnimalList();
                     mAnimalList = (ArrayList<Animal>) animals;
-                    //String content = "";
 
-
-
-//                    for (Animal animal: animals){
-//
-//
-//
-//                        content += "ImageUrl: " + animal.getImageUrl() + "\n";
-//                        content += "Title: " + animal.getImageTitle() + "\n\n";
-//
-//
-//
-//
-//                    }
-
-                    //textViewResultHome.setText(content);
 
                     mAnimalAdapter = new AnimalAdapter(getContext(), mAnimalList);
                     mRecyclerView.setAdapter(mAnimalAdapter);
-                    mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                    //mRecyclerView.setLayoutManager(mLayoutManager);
                     mAnimalAdapter.setOnItemClickListener(new AnimalAdapter.OnItemClickListener() {
                         @Override
                         public void onItemClick(int position) {
@@ -118,6 +113,8 @@ public class HomeFragment extends Fragment implements AnimalAdapter.OnItemClickL
 
 
 
+
+
                     return;
                 } else{
                     Toast.makeText(getContext(), "not succesful", Toast.LENGTH_SHORT).show();
@@ -128,7 +125,7 @@ public class HomeFragment extends Fragment implements AnimalAdapter.OnItemClickL
 
             @Override
             public void onFailure(Call<Animals> call, Throwable t) {
-                textViewResultHome.setText("Error: " + String.valueOf(t.getMessage()));
+                Toast.makeText(getContext(), String.valueOf(t.getMessage()), Toast.LENGTH_SHORT).show();
 
 
             }
@@ -137,20 +134,55 @@ public class HomeFragment extends Fragment implements AnimalAdapter.OnItemClickL
     }
 
     @Override
-    public void onItemClick(int position) {
-//        Intent detailIntent = new Intent(getContext(), ItemActivity.class);
-//        Animal clickedItem = mAnimalList.get(position);
-//
-//        detailIntent.putExtra(EXTRA_URL, clickedItem.getImageUrl());
-//        detailIntent.putExtra(EXTRA_NUMBER, clickedItem.getImageTitle());
-//        detailIntent.putExtra(Intent.EXTRA_TITLE, String.valueOf(position+1));
-//
-//        startActivity(detailIntent);
+    public void onPause()
+    {
+        super.onPause();
+        //read current recyclerview position
+        index = ((LinearLayoutManager) mRecyclerView.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
+        View v = mRecyclerView.getChildAt(0);
+        top = (v == null) ? 0 : (v.getTop() - mRecyclerView.getPaddingTop());
+    }
 
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        //set recyclerview position
+        if(index != -1)
+        {
+            mLayoutManager.scrollToPosition( index);
+        }
     }
 
 
 
+
+//    @Override
+//    public void onPause() {
+//        super.onPause();
+//
+//        lastFirstVisiblePosition = ((LinearLayoutManager) mRecyclerView.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
+//        Toast.makeText(getContext(), "Pause" + lastFirstVisiblePosition, Toast.LENGTH_SHORT).show();
+//    }
+//
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//
+//        if (lastFirstVisiblePosition!=0){
+//
+//            ( mRecyclerView.getLayoutManager()).scrollToPosition(lastFirstVisiblePosition);
+//
+//
+//
+//        }
+//
+//        Toast.makeText(getContext(), "Resume" + lastFirstVisiblePosition, Toast.LENGTH_SHORT).show();
+//
+//
+//
+//
+//    }
 
 
 }
