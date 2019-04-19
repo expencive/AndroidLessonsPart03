@@ -1,7 +1,6 @@
 package expencive.vk.com.fragmentbottomnavigation.adapter;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +12,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import expencive.vk.com.fragmentbottomnavigation.HomeFragment;
-import expencive.vk.com.fragmentbottomnavigation.MainActivity;
 import expencive.vk.com.fragmentbottomnavigation.R;
 import expencive.vk.com.fragmentbottomnavigation.models.Animal;
 

@@ -8,9 +8,9 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import static expencive.vk.com.fragmentbottomnavigation.HomeFragment.EXTRA_NUMBER;
-import static expencive.vk.com.fragmentbottomnavigation.HomeFragment.EXTRA_TITLE;
-import static expencive.vk.com.fragmentbottomnavigation.HomeFragment.EXTRA_URL;
+import static expencive.vk.com.fragmentbottomnavigation.CatsFragment.EXTRA_NUMBER;
+import static expencive.vk.com.fragmentbottomnavigation.CatsFragment.EXTRA_TITLE;
+import static expencive.vk.com.fragmentbottomnavigation.CatsFragment.EXTRA_URL;
 
 public class ItemActivity extends AppCompatActivity {
 

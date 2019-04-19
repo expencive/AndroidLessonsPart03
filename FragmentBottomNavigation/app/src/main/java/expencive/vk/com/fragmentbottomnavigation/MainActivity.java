@@ -6,22 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import expencive.vk.com.fragmentbottomnavigation.api.ApiClient;
-import expencive.vk.com.fragmentbottomnavigation.api.ApiInterface;
-import expencive.vk.com.fragmentbottomnavigation.api.RetrofitRequest;
-import expencive.vk.com.fragmentbottomnavigation.models.Animal;
-import expencive.vk.com.fragmentbottomnavigation.models.Animals;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,8 +18,8 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
-        //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-               // new HomeFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+               new CatsFragment()).commit();
 
 
 
@@ -51,10 +35,10 @@ public class MainActivity extends AppCompatActivity {
 
             switch (menuItem.getItemId()){
                 case R.id.nav_home:
-                    selectedFrament = new HomeFragment();
+                    selectedFrament = new CatsFragment();
                     break;
                 case R.id.nav_favorits:
-                    selectedFrament = new FavoritsFragment();
+                    selectedFrament = new DogsFragment();
                     break;
 
 

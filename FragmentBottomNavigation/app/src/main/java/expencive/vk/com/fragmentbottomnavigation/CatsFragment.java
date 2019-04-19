@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -25,11 +24,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static expencive.vk.com.fragmentbottomnavigation.HomeFragment.EXTRA_NUMBER;
-import static expencive.vk.com.fragmentbottomnavigation.HomeFragment.EXTRA_TITLE;
-import static expencive.vk.com.fragmentbottomnavigation.HomeFragment.EXTRA_URL;
+public class CatsFragment extends Fragment{
+    public static final String EXTRA_URL = "imageUrl";
+    public static final String EXTRA_NUMBER = "number";
+    public static final String EXTRA_TITLE = "title";
 
-public class FavoritsFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private AnimalAdapter mAnimalAdapter;
@@ -38,12 +37,16 @@ public class FavoritsFragment extends Fragment {
     public static int index = -1;
     RecyclerView.LayoutManager mLayoutManager;
 
+
+
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_favorits, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_cats, container, false);
 
-        mRecyclerView = rootView.findViewById(R.id.recycler_view_favorits);
+        mRecyclerView = rootView.findViewById(R.id.recycler_view_cats);
 
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setHasFixedSize(true);
@@ -60,31 +63,28 @@ public class FavoritsFragment extends Fragment {
         loadJson();
 
 
-
-
     }
 
     public void loadJson(){
 
         ApiInterface apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-
-
         Call<Animals> call;
-
-        call = apiInterface.getDogs();
+        call = apiInterface.getCats();
 
         call.enqueue(new Callback<Animals>() {
             @Override
             public void onResponse(Call<Animals> call, Response<Animals> response) {
                 if (response.isSuccessful() && response.body().getAnimalList()!=null) {
+                    mAnimalList = new ArrayList<>();
 
-                    List<Animal> animals = new ArrayList<>();
-                    animals = response.body().getAnimalList();
+
+
+                    List<Animal> animals = response.body().getAnimalList();
                     mAnimalList = (ArrayList<Animal>) animals;
+
 
                     mAnimalAdapter = new AnimalAdapter(getContext(), mAnimalList);
                     mRecyclerView.setAdapter(mAnimalAdapter);
-                    //mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                     mAnimalAdapter.setOnItemClickListener(new AnimalAdapter.OnItemClickListener() {
                         @Override
                         public void onItemClick(int position) {
@@ -99,10 +99,6 @@ public class FavoritsFragment extends Fragment {
                         }
                     });
 
-
-
-
-
                     return;
                 } else{
                     Toast.makeText(getContext(), "not succesful", Toast.LENGTH_SHORT).show();
@@ -113,7 +109,7 @@ public class FavoritsFragment extends Fragment {
 
             @Override
             public void onFailure(Call<Animals> call, Throwable t) {
-                Toast.makeText(getContext(), "" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), String.valueOf(t.getMessage()), Toast.LENGTH_SHORT).show();
 
 
             }
@@ -121,14 +117,11 @@ public class FavoritsFragment extends Fragment {
 
     }
 
-
     @Override
     public void onPause()
     {
         super.onPause();
         index = ((LinearLayoutManager) mRecyclerView.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
-
-
     }
 
     @Override
@@ -140,5 +133,7 @@ public class FavoritsFragment extends Fragment {
             mLayoutManager.scrollToPosition( index);
         }
     }
+
+
 
 }
