@@ -126,6 +126,8 @@ public class DogsFragment extends Fragment {
         index = ((LinearLayoutManager) mRecyclerView.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
 
 
+
+
     }
 
     @Override

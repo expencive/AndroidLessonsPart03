@@ -10,6 +10,8 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity {
 
 
+    public  Fragment selectedFrament = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,20 +20,12 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-               new CatsFragment()).commit();
-
-
-
-
-
-
     }
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-            Fragment selectedFrament = null;
 
             switch (menuItem.getItemId()){
                 case R.id.nav_home:
@@ -40,18 +34,23 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.nav_favorits:
                     selectedFrament = new DogsFragment();
                     break;
-
-
             }
 
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    selectedFrament).commit();
+            setBottomNavigation();
+
 
             return true;
         }
 
     };
 
+    private void setBottomNavigation(){
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                selectedFrament).commit();
+
+    }
 
 
 }
+
