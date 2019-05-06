@@ -3,9 +3,11 @@ package expencive.vk.com.dagger2ex;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import javax.inject.Inject;
+
 public class MainActivity extends AppCompatActivity {
 
-    private Car car;
+    @Inject  Car car;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -13,8 +15,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         CarComponent component = DaggerCarComponent.create();
+        component.inject(this);
 
-        car = component.getCar();
+        //car = component.getCar();
 
         car.drive();
     }
