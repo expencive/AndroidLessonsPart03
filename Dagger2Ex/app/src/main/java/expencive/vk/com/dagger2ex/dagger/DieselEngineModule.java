@@ -3,13 +3,22 @@ package expencive.vk.com.dagger2ex.dagger;
 
 import dagger.Binds;
 import dagger.Module;
+import dagger.Provides;
 import expencive.vk.com.dagger2ex.car.DieselEngine;
 import expencive.vk.com.dagger2ex.car.Engine;
 
 @Module
-public abstract class DieselEngineModule {
+public  class DieselEngineModule {
 
-    @Binds
-    abstract Engine bindEngine(DieselEngine engine);
+    private int horsePower;
+
+    public DieselEngineModule(int horsePower) {
+        this.horsePower = horsePower;
+    }
+
+    @Provides
+    Engine provideEngine(){
+        return new DieselEngine(horsePower);
+    }
 
 }
