@@ -1,8 +1,6 @@
-package expencive.vk.com.dagger2ex;
+package expencive.vk.com.dagger2ex.car;
 
-import android.app.Application;
 import android.util.Log;
-import android.widget.Toast;
 
 import javax.inject.Inject;
 
@@ -24,7 +22,9 @@ public class Car {
     }
 
     public void drive(){
+        engine.start();
         Log.d(TAG, "driving........................................................................");
+
 
     }
 }

@@ -5,9 +5,13 @@ import android.os.Bundle;
 
 import javax.inject.Inject;
 
+import expencive.vk.com.dagger2ex.car.Car;
+import expencive.vk.com.dagger2ex.dagger.CarComponent;
+
 public class MainActivity extends AppCompatActivity {
 
-    @Inject  Car car;
+    @Inject
+    Car car;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

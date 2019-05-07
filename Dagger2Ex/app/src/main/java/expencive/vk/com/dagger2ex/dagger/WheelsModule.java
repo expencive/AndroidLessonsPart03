@@ -1,10 +1,11 @@
-package expencive.vk.com.dagger2ex;
+package expencive.vk.com.dagger2ex.dagger;
 
-
-import android.support.v7.widget.VectorEnabledTintResources;
 
 import dagger.Module;
 import dagger.Provides;
+import expencive.vk.com.dagger2ex.car.Rims;
+import expencive.vk.com.dagger2ex.car.Tires;
+import expencive.vk.com.dagger2ex.car.Wheels;
 
 @Module
 public class WheelsModule {

@@ -1,6 +1,4 @@
-package expencive.vk.com.dagger2ex;
-
-import javax.inject.Inject;
+package expencive.vk.com.dagger2ex.car;
 
 public class Wheels {
     //we don't own this class so we can't annotate it with @Inject
