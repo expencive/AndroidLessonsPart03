@@ -6,6 +6,9 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AlertDialogLayout;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -18,7 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dmax.dialog.SpotsDialog;
+import expencive.vk.com.comicsreader.Adapter.MyComicAdapter;
 import expencive.vk.com.comicsreader.Adapter.MySliderAdapter;
+import expencive.vk.com.comicsreader.Common.Common;
 import expencive.vk.com.comicsreader.Interface.IBannerLoadDone;
 import expencive.vk.com.comicsreader.Interface.IComicsLoadDone;
 import expencive.vk.com.comicsreader.Model.Comic;
@@ -30,6 +35,8 @@ public class MainActivity extends AppCompatActivity implements IBannerLoadDone, 
     Slider slider;
 
     SwipeRefreshLayout swipeRefreshLayout;
+    RecyclerView recycler_comic;
+    TextView txt_comic;
 
     //Database
 
@@ -82,6 +89,11 @@ public class MainActivity extends AppCompatActivity implements IBannerLoadDone, 
 
             }
         });
+
+        recycler_comic = findViewById(R.id.recycler_comic);
+        recycler_comic.setHasFixedSize(true);
+        recycler_comic.setLayoutManager(new GridLayoutManager(this, 2));
+        txt_comic = findViewById(R.id.txt_comic);
     }
 
     private void loadComic() {
@@ -150,6 +162,15 @@ public class MainActivity extends AppCompatActivity implements IBannerLoadDone, 
 
     @Override
     public void onComicLoadDoneListener(List<Comic> comicList) {
+        Common.comicList = comicList;
+
+        recycler_comic.setAdapter(new MyComicAdapter(getBaseContext(), comicList));
+        txt_comic.setText(new StringBuilder("NEW COMIC (")
+        .append(comicList.size())
+        .append(")"));
+
+        if (!swipeRefreshLayout.isRefreshing())
+            alertDialog.dismiss();
 
     }
 }
