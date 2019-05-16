@@ -16,7 +16,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -69,7 +71,47 @@ public class FilterSearchActiity extends AppCompatActivity {
 
         final LayoutInflater inflater = this.getLayoutInflater();
 
-        View filter_layout = inflater.inflate(R.layout.dialog_options, null);
+        View search_layout = inflater.inflate(R.layout.dialog_search, null);
+
+        final EditText edt_search = search_layout.findViewById(R.id.edt_seach);
+        alertDialog.setView(search_layout);
+
+        alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        alertDialog.setPositiveButton("SEARCH", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                fetchSearchComic(edt_search.getText().toString());
+
+            }
+        });
+
+        alertDialog.show();
+    }
+
+    private void fetchSearchComic(String query) {
+
+        List<Comic> comic_search = new ArrayList<>();
+        for (Comic comic: Common.comicList){
+            if (comic.Name.contains(query))
+                comic_search.add(comic);
+        }
+
+        if (comic_search.size()>0){
+
+            recycler_filter_search.setAdapter(new MyComicAdapter(getBaseContext(), comic_search));}
+
+        else{
+            Toast.makeText(this, "No Result", Toast.LENGTH_SHORT).show();
+        }
+
+
     }
 
     private void showFiltersDialog() {
@@ -142,7 +184,7 @@ public class FilterSearchActiity extends AppCompatActivity {
 
                     //filter by this query
 
-                    fetchFilterCategory(filter_query.toString())
+                    fetchFilterCategory(filter_query.toString());
                 }
 
             }
@@ -154,11 +196,20 @@ public class FilterSearchActiity extends AppCompatActivity {
         List<Comic> comic_filtered = new ArrayList<>();
         for (Comic comic: Common.comicList){
 
-            if (comic.Category.contains(query))
-                comic_filtered.add(comic);
+            if (comic.Category!=null) {
+
+                if (comic.Category.contains(query))
+                    comic_filtered.add(comic);
+            }
 
         }
 
-        recycler_filter_search.setAdapter(new MyComicAdapter(getBaseContext(), comic_filtered));
+        if (comic_filtered.size()>0){
+
+        recycler_filter_search.setAdapter(new MyComicAdapter(getBaseContext(), comic_filtered));}
+
+        else{
+            Toast.makeText(this, "No Result", Toast.LENGTH_SHORT).show();
+        }
     }
 }
