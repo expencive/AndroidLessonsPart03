@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -52,7 +53,12 @@ public class MyComicAdapter extends RecyclerView.Adapter<MyComicAdapter.MyViewHo
             public void onClick(View view, int position) {
                 //save comic selected
                 Common.comicSelected = comicList.get(position);
+
+                if (Common.comicSelected.Chapters!=null){
                 context.startActivity(new Intent(context, ChapterActivity.class));
+                } else {
+                    Toast.makeText(context, "Something wrong", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

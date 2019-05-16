@@ -1,6 +1,7 @@
 package expencive.vk.com.comicsreader;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,9 @@ import android.os.Bundle;
 import android.support.v7.widget.AlertDialogLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements IBannerLoadDone, 
     SwipeRefreshLayout swipeRefreshLayout;
     RecyclerView recycler_comic;
     TextView txt_comic;
+    ImageView btn_filter_search;
 
     //Database
 
@@ -54,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements IBannerLoadDone, 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         //init database
 
         banners = FirebaseDatabase.getInstance().getReference("Banners");
@@ -62,6 +68,14 @@ public class MainActivity extends AppCompatActivity implements IBannerLoadDone, 
         //initlistener
         bannerListener = this;
         comicListener = this;
+
+        btn_filter_search = findViewById(R.id.btn_show_filter_search);
+        btn_filter_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, FilterSearchActiity.class));
+            }
+        });
 
 
 
@@ -117,6 +131,8 @@ public class MainActivity extends AppCompatActivity implements IBannerLoadDone, 
                     Comic comic = comicSnapshot.getValue(Comic.class);
                     comic_load.add(comic);
                 }
+
+
 
                 comicListener.onComicLoadDoneListener(comic_load);
 

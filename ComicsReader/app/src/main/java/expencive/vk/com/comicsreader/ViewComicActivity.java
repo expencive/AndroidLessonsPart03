@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wajahatkarim3.easyflipviewpager.BookFlipPageTransformer;
+
+import expencive.vk.com.comicsreader.Adapter.MyViewPagerAdapter;
 import expencive.vk.com.comicsreader.Common.Common;
 import expencive.vk.com.comicsreader.Model.Chapter;
 
@@ -61,7 +64,15 @@ public class ViewComicActivity extends AppCompatActivity {
 
             if (chapter.Links.size()>0){
 
-                MyViewPagerAdapter adapter = new MyViewPagerAdapter(getBaseContext(), chapter.Links)
+                MyViewPagerAdapter adapter = new MyViewPagerAdapter(getBaseContext(), chapter.Links);
+                viewPager.setAdapter(adapter);
+
+                txt_chapter_name.setText(Common.formatString(Common.comicSelected.Name));
+
+                //animation
+                BookFlipPageTransformer bookFlipPageTransformer = new BookFlipPageTransformer();
+                bookFlipPageTransformer.setScaleAmountPercent(10f);
+                viewPager.setPageTransformer(true, bookFlipPageTransformer);
 
             }else{
                 Toast.makeText(this, "No image here", Toast.LENGTH_SHORT).show();
