@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         };
 
         Dog dog = new Dog("milk", 4);
+        dog.move();
 
 
         System.out.println(animal.equals(dog));
