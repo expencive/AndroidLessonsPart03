@@ -18,6 +18,7 @@ import java.util.List;
 import expencive.vk.com.comicsreader.ChapterActivity;
 import expencive.vk.com.comicsreader.Common.Common;
 import expencive.vk.com.comicsreader.Interface.IRecyclerItemClickListener;
+import expencive.vk.com.comicsreader.MainActivity;
 import expencive.vk.com.comicsreader.Model.Comic;
 import expencive.vk.com.comicsreader.R;
 
