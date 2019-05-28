@@ -8,6 +8,7 @@ import com.example.javacore.Interfaces.AnimalInterfaces;
 import com.example.javacore.Interfaces.Info;
 import com.example.javacore.Interfaces.Person;
 import com.example.javacore.Threads.MyThread;
+import com.example.javacore.Threads.Runner;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -24,20 +25,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MyThread myThread = new MyThread();
-        MyThread super1 = new MyThread(){
-            @Override
-            public void run() {
-                for (int i=0; i<1000; i++){
+//        MyThread myThread = new MyThread();
+//        MyThread super1 = new MyThread(){
+//            @Override
+//            public void run() {
+//                for (int i=0; i<1000; i++){
+//
+//                    System.out.println("Super " + i);
+//
+//                }
+//
+//            }
+//        };
+//        myThread.start();
+//        super1.start();
 
-                    System.out.println("Super " + i);
-
-                }
-
-            }
-        };
-        myThread.start();
-        super1.start();
+        Thread thread = new Thread(new Runner());
+        thread.start();
 
         for (int i=0; i<1000; i++){
 
