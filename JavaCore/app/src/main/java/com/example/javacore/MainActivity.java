@@ -42,6 +42,18 @@ public class MainActivity extends AppCompatActivity {
 
         Thread thread = new Thread(new Runner());
         thread.start();
+        Thread thread2 = new Thread(new Runner()){
+            @Override
+            public void run() {
+                for (int i=0; i<1000; i++){
+
+                    System.out.println("Third " + i);
+
+                }
+            }
+        };
+
+        thread2.start();
 
         for (int i=0; i<1000; i++){
 
