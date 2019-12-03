@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/AndroidLessonsPart03-CiF050FirebaseUploadExample.iml" filepath="$PROJECT_DIR$/AndroidLessonsPart03-CiF050FirebaseUploadExample.iml" />
       <module fileurl="file://$PROJECT_DIR$/CiF050FirebaseUploadExample.iml" filepath="$PROJECT_DIR$/CiF050FirebaseUploadExample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/CiF050FirebaseUploadExample-app.iml" filepath="$PROJECT_DIR$/app/CiF050FirebaseUploadExample-app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
