@@ -2,13 +2,14 @@ package vk.expencive.daggerkotlin.dagger
 
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import vk.expencive.daggerkotlin.car.DieselEngine
 import vk.expencive.daggerkotlin.car.Engine
 
 
 @Module
-abstract class DieselEngineModule {
+class DieselEngineModule(private var horsePower: Int) {
 
-    @Binds
-    abstract fun bindDieselEngine(engine: DieselEngine): Engine
+    @Provides
+    fun provideDieselEngine(): Engine = DieselEngine(horsePower)
 }
