@@ -3,14 +3,13 @@ package vk.expencive.kotlincoroutines
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
+
+    private val TIMEOUT: Long = 6900
 
     private val RESULT_2: String  = "Result #2"
     private val RESULT_1 = "Result #1"
@@ -20,6 +19,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         button.setOnClickListener {
+
+            setNewText("Click")
 
 
 
@@ -45,14 +46,30 @@ class MainActivity : AppCompatActivity() {
     }
 
     private suspend fun fakeApiRequest() {
-        val result1 = getResult1FromApi()
-        println("debug: ${result1}")
-        setTextOnMainThread(result1)
+
+        withContext(IO){
+            val job = withTimeoutOrNull(TIMEOUT) {
+                val result1 = getResult1FromApi()
+
+                println("debug: ${result1}")
+                setTextOnMainThread("Got $result1")
+                val result2 = getResult2FromApi()
+                setTextOnMainThread("Got $result2")
+
+            }
+
+            if (job==null){
+                val cancelMessage = "Cancell job ... job tooks longer than $TIMEOUT"
+                println("debug: ${cancelMessage}")
+                setTextOnMainThread(cancelMessage)
+            }
+        }
 
 
-        val result2 = getResult2FromApi()
 
-        setTextOnMainThread(result2)
+
+
+
     }
 
     private suspend fun getResult1FromApi(): String{
