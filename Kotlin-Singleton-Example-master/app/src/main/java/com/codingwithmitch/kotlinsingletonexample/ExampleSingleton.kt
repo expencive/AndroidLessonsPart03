@@ -1,6 +1,6 @@
-package vk.expencive.kotlinsingletonexample
+package com.codingwithmitch.kotlinsingletonexample
 
-import vk.expencive.kotlinsingletonexample.models.User
+import com.codingwithmitch.kotlinsingletonexample.model.User
 
 object ExampleSingleton {
 
@@ -8,3 +8,6 @@ object ExampleSingleton {
         User("mitchelltabian@gmail.com", "mitch", "some_image_url.png")
     }
 }
+
+
+
