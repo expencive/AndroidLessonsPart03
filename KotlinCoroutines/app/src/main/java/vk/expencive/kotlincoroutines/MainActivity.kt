@@ -6,6 +6,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
+import kotlin.system.measureTimeMillis
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,9 +26,11 @@ class MainActivity : AppCompatActivity() {
 
 
             //Может быть IO (Для интернет запросов, БД), Main(в главном потоке), Default(для тяжелых операций)
-            CoroutineScope(IO).launch {
-                fakeApiRequest()
-            }
+//            CoroutineScope(IO).launch {
+//                fakeApiRequest()
+//            }
+
+            fakeApiRequest()
 
         }
     }
@@ -45,32 +48,58 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private suspend fun fakeApiRequest() {
+    private fun fakeApiRequest(){
+        //вариант для последовательного запуска одного запроса, который зависит от выполнения другого
 
-        withContext(IO){
-            val job = withTimeoutOrNull(TIMEOUT) {
-                val result1 = getResult1FromApi()
+        CoroutineScope(IO).launch {
 
-                println("debug: ${result1}")
-                setTextOnMainThread("Got $result1")
-                val result2 = getResult2FromApi()
-                setTextOnMainThread("Got $result2")
+            val executionTime = measureTimeMillis {
+                val result1 = async {
+                    println("Debug: launching job1 ${Thread.currentThread().name}")
+                    getResult1FromApi()
+                }.await()
 
+                val result2 = async {
+                    println("Debug: launching job2 ${Thread.currentThread().name}")
+                    getResult2FromApi(result1)
+                }.await()
+
+                println("Debug: got result 2: $result2")
             }
 
-            if (job==null){
-                val cancelMessage = "Cancell job ... job tooks longer than $TIMEOUT"
-                println("debug: ${cancelMessage}")
-                setTextOnMainThread(cancelMessage)
-            }
+            println("Debug: total elapsed time $executionTime ms.")
         }
 
 
 
-
-
-
     }
+
+//    private suspend fun fakeApiRequest() {
+//первый уровень, самый обычный варианта использования коротины
+//        withContext(IO){
+//            val job = withTimeoutOrNull(TIMEOUT) {
+//                val result1 = getResult1FromApi()
+//
+//                println("debug: ${result1}")
+//                setTextOnMainThread("Got $result1")
+//                val result2 = getResult2FromApi()
+//                setTextOnMainThread("Got $result2")
+//
+//            }
+//
+//            if (job==null){
+//                val cancelMessage = "Cancell job ... job tooks longer than $TIMEOUT"
+//                println("debug: ${cancelMessage}")
+//                setTextOnMainThread(cancelMessage)
+//            }
+//        }
+//
+//
+//
+//
+//
+//
+//    }
 
     private suspend fun getResult1FromApi(): String{
         logThread("getResult1FromApi")
@@ -79,10 +108,13 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private suspend fun getResult2FromApi(): String {
+    private suspend fun getResult2FromApi(result1: String): String {
         logThread("getResult2FromApi")
         delay(3000)
-        return RESULT_2
+        if (result1.equals(RESULT_1)){
+        return RESULT_2}
+        throw CancellationException("Result #1 was incorrect")
+
 
     }
 
